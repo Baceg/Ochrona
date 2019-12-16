@@ -111,11 +111,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public Integer deleteNewData(String prod, String model) {
+    public Integer deleteAllData(String prod, String model) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "prod = ? and model = ?", new String[]{prod, model});
     }
 
-
+    public Integer deleteWebData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, "certy != user", new String[] {"user"});
+    }
 }
 

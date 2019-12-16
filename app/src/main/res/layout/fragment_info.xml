@@ -7,7 +7,13 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="353dp"
-        android:layout_height="397dp"
+        android:layout_width="366dp"
+        android:layout_height="102dp"
         android:text="Info" />
+
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update" />
 </RelativeLayout>
