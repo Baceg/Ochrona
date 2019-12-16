@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/navigation_baza"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Baza" />
+
+    <item
+        android:id="@+id/navigation_moje"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Moje" />
+
+    <item
+        android:id="@+id/navigation_info"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Info" />
+    </group>
+
+
+
+</menu>
