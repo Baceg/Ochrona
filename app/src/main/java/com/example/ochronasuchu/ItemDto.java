@@ -86,6 +86,9 @@ class ItemDto {
     public String getModel() {
         return model;
     }
+    public String getCerty() {
+        return certy;
+    }
 
 
     private String typ;
@@ -116,12 +119,12 @@ class ItemDto {
     private String M;
     private String L;
     private String SNR;
-
+    private String certy;
 
     public ItemDto(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                    String sf125, String sf250, String sf500, String sf1000, String sf2000, String sf4000, String sf8000,
                    String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
-                   String H, String M, String L, String SNR) {
+                   String H, String M, String L, String SNR, String certy) {
         this.typ = typ;
         this.prod = prod;
         this.model = model;
@@ -150,6 +153,6 @@ class ItemDto {
         this.M = H;
         this.L = H;
         this.SNR = SNR;
-
+        this.certy = certy;
     }
 }

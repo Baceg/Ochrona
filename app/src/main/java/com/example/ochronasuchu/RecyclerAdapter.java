@@ -1,65 +1,51 @@
 package com.example.ochronasuchu;
 
 import android.support.annotation.NonNull;
-//import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
+    private  ArrayList<ItemDto> mRecList;
 
-    List<ItemDto> list;
 
-    public RecyclerAdapter(List list) {
-        this.list = list;
+    public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        //public ImageView mImageView;
+        public TextView mTextView4;
+        public TextView mTextView5;
+
+        public RecyclerViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mTextView4 = itemView.findViewById(R.id.textView4);
+            mTextView5 = itemView.findViewById(R.id.textView5);
+        }
     }
 
-    @NonNull
-    @Override
-    public Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_view_item, viewGroup, false);
-        Holder holder = new Holder(view);
-        return holder;
-
+    public RecyclerAdapter(ArrayList<ItemDto> recList){
+        mRecList = recList;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holder holder, int position) {
-        //zamienić na nowe
-        //holder.prod.setText(list.get(position).getProd());
-        //holder.model.setText(list.get(position).getModel());
-        //holder.snr.setText(list.get(position).getSNR());
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View V = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item,parent,false);
+        RecyclerViewHolder rvh = new RecyclerViewHolder(V);
+        return rvh;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
+        ItemDto currentItem = mRecList.get(position);
+        holder.mTextView4.setText(currentItem.getProd());
+        holder.mTextView5.setText(currentItem.getModel());
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return mRecList.size();
     }
-
-    public class Holder extends RecyclerView.ViewHolder {
-
-        //CardView cardView;
-        //TextView prod;
-        //TextView model;
-        //TextView snr;
-
-        public Holder(@NonNull View itemView) {
-            super(itemView);
-            //ni wiem
-            //cardView = itemView.findViewById(R.id.item_card);
-            //prod = itemView.findViewById(R.id.prod);
-            //model = itemView.findViewById(R.id.model);
-            //snr = itemView.findViewById(R.id.snr);
-        }
-    }
-
-
-
-
-
-
 }

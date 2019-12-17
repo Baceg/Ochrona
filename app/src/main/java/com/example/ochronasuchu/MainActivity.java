@@ -1,36 +1,62 @@
 package com.example.ochronasuchu;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private RecyclerView mRecyclerView1;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
     DatabaseHelper myDB;
-    Button butttonUpdate;
+    Button buttonUpdate;
 
 
     private void initializeAttributes() {
-        butttonUpdate = (Button) findViewById(R.id.updateButton);
+        buttonUpdate = (Button) findViewById(R.id.updateButton);
+
     }
     public void showRecords(){
-        //RecyclerView recyclerView = findViewById(R.id.main_recycler_view)
-        //no i wiecej
+        ArrayList<ItemDto> listaOchron = new ArrayList<>();
+        Cursor cursor = myDB.getAllData();
+        while (cursor.moveToNext()){
+            listaOchron.add(new ItemDto(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                    cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11),
+                    cursor.getString(12), cursor.getString(13), cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17),
+                    cursor.getString(18), cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23),
+                    cursor.getString(24), cursor.getString(25), cursor.getString(26), cursor.getString(27), cursor.getString(28), cursor.getString(29)));
+        }
+
+
+        mRecyclerView1 = findViewById(R.id.recycler_view_baza);
+        mRecyclerView1.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new RecyclerAdapter(listaOchron);
+        mRecyclerView1.setLayoutManager(mLayoutManager);
+        mRecyclerView1.setAdapter(mAdapter);
+
+
+
     }
 
 
@@ -49,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         initializeAttributes();
+        showRecords();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener naviListener =
@@ -104,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void UpdateData(){
-        butttonUpdate.setOnClickListener(
+        buttonUpdate.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
