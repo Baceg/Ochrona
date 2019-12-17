@@ -32,29 +32,31 @@ public class MainActivity extends AppCompatActivity {
     Button buttonUpdate;
 
 
-    private void initializeAttributes() {
-        buttonUpdate = (Button) findViewById(R.id.updateButton);
-
-    }
     public void showRecords(){
+        myDB = new DatabaseHelper(this);
         ArrayList<ItemDto> listaOchron = new ArrayList<>();
         Cursor cursor = myDB.getAllData();
-        while (cursor.moveToNext()){
+        /*while (cursor.moveToNext()){
             listaOchron.add(new ItemDto(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
                     cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11),
                     cursor.getString(12), cursor.getString(13), cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17),
                     cursor.getString(18), cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23),
                     cursor.getString(24), cursor.getString(25), cursor.getString(26), cursor.getString(27), cursor.getString(28), cursor.getString(29)));
         }
+        */
+        listaOchron.add(new ItemDto("1","1","1","1","1","1","1","1","1","1",
+                "1","1","1","1","1","1","1","1","1","1","1",
+                "1","1","1","1","1","1","1","1"));
 
 
+        setContentView(R.layout.fragment_baza);
         mRecyclerView1 = findViewById(R.id.recycler_view_baza);
         mRecyclerView1.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new RecyclerAdapter(listaOchron);
         mRecyclerView1.setLayoutManager(mLayoutManager);
         mRecyclerView1.setAdapter(mAdapter);
-
+        setContentView(R.layout.activity_main);
 
 
     }
@@ -66,16 +68,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myDB = new DatabaseHelper(this);
+        buttonUpdate = (Button) findViewById(R.id.updateButton);
 
+        showRecords();
         //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(naviListener);
 
 
 
-        initializeAttributes();
-        showRecords();
+
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener naviListener =
