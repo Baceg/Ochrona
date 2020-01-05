@@ -17,7 +17,13 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+
 
 public class InfoFragment extends Fragment {
 
@@ -29,7 +35,7 @@ public class InfoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_info,container,false);
-
+        myDB = new DatabaseHelper(this.getActivity());
         buttonUpdate = (Button) view.findViewById(R.id.updateButton);
 
 
@@ -41,20 +47,26 @@ public class InfoFragment extends Fragment {
     {
         URLConnection feedUrl;
         List<String> placeAddress = new ArrayList<>();
-
+        final StringBuilder builder = new StringBuilder();
         try
         {
-            feedUrl = new URL(urlString).openConnection();
-            InputStream is = feedUrl.getInputStream();
+            //feedUrl = new URL(urlString).openConnection();
+            Document doc = Jsoup.connect(urlString).get();
+            Element body = doc.body();
+            builder.append(body.text());
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            String line = null;
+            String seperate_records[] = String.valueOf(builder).split(" @@@ ");
+            placeAddress = Arrays.asList(seperate_records);
+            //Log.d("TAG", String.valueOf(builder));
+            //InputStream is = feedUrl.getInputStream();
+            //BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            //String line = null;
 
-            while ((line = reader.readLine()) != null) // read line by line
-            {
-                placeAddress.add(line); // add line to list
-            }
-            is.close(); // close input stream
+            //while ((line = reader.readLine()) != null) // read line by line
+            //{
+            //    placeAddress.add(line); // add line to list
+            //}
+            //is.close(); // close input stream
 
             return placeAddress; // return whatever you need
         }
@@ -78,7 +90,7 @@ public class InfoFragment extends Fragment {
                     public void onClick(View v) {
 
 
-                        //Integer deletedRows = myDB.deleteWebData();
+                        Integer deletedRows = myDB.deleteWebData();
                         //Boolean dataInserted = false;
                         //nie wiem
                         new Thread(new Runnable() {
@@ -86,9 +98,9 @@ public class InfoFragment extends Fragment {
                             public void run() {
                                 final List<String> addressList = getTextFromWeb("http://10.0.2.2/ochslu/");
                                 getActivity().runOnUiThread(new Runnable() {
-                                    Log.d("TAG",addressList.get(0))
                                     @Override
                                     public void run() {
+
                                         if (addressList != null) {
                                             for (int i = 0; i < addressList.size() / 29; i++)
                                                 myDB.insertData(addressList.get(i * 29), addressList.get(i * 29 + 1), addressList.get(i * 29 + 2), addressList.get(i * 29 + 3), addressList.get(i * 29 + 4), addressList.get(i * 29 + 5),

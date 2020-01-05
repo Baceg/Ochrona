@@ -29,7 +29,7 @@ public class BazaFragment extends Fragment {
         showRecords();
         mRecyclerView1 = view.findViewById(R.id.recycler_view_baza);
         mRecyclerView1.setHasFixedSize(true);
-
+        myDB = new DatabaseHelper(this.getActivity());
         mLayoutManager = new LinearLayoutManager(this.getActivity());
 
         mRecyclerView1.setLayoutManager(mLayoutManager);
@@ -42,9 +42,9 @@ public class BazaFragment extends Fragment {
 
 
     public void showRecords() {
-        //myDB = new DatabaseHelper(this.getActivity());
+        myDB = new DatabaseHelper(this.getActivity());
         ArrayList<ItemDto> listaOchron = new ArrayList<>();
-        /*Cursor cursor = myDB.getAllData();
+        Cursor cursor = myDB.getAllData();
         while (cursor.moveToNext()){
             listaOchron.add(new ItemDto(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
                     cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11),
@@ -52,13 +52,8 @@ public class BazaFragment extends Fragment {
                     cursor.getString(18), cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23),
                     cursor.getString(24), cursor.getString(25), cursor.getString(26), cursor.getString(27), cursor.getString(28), cursor.getString(29)));
         }
-*/
-        listaOchron.add(new ItemDto("1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-                "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-                "1", "1", "1", "1", "1", "1", "1", "1"));
-        listaOchron.add(new ItemDto("1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-                "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-                "1", "1", "1", "1", "1", "1", "1", "1"));
+
+
 
         //setContentView(R.layout.fragment_baza);
 

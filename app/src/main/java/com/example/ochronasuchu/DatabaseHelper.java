@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_27 = "M";
     public static final String COL_28 = "L";
     public static final String COL_29 = "SNR";
-    public static final String COL_30 = "certy";
+    public static final String COL_30 = "Certyfikat";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -70,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean insertData(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                               String sf125, String sf250, String sf500, String sf1000, String sf2000, String sf4000, String sf8000,
                               String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
-                              String H, String M, String L, String SNR,String certy) {
+                              String H, String M, String L, String SNR,String Certyfikat) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -102,7 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_27, M);
         contentValues.put(COL_28, L);
         contentValues.put(COL_29, SNR);
-        contentValues.put(COL_30, certy);
+        contentValues.put(COL_30, Certyfikat);
         long result = db.insert(TABLE_NAME,null, contentValues);
         if (result == -1)
             return false;
@@ -118,7 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Integer deleteWebData() {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "certy != user", new String[] {"user"});
+        return db.delete(TABLE_NAME, "Certyfikat != ?", new String[] {"user"});
     }
 }
 
