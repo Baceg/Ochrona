@@ -15,12 +15,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
 
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        //public ImageView mImageView;
+        public ImageView mImageView;
         public TextView mTextView4;
         public TextView mTextView5;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
+            mImageView = itemView.findViewById(R.id.imageView);
             mTextView4 = itemView.findViewById(R.id.textView4);
             mTextView5 = itemView.findViewById(R.id.textView5);
         }
@@ -42,6 +43,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         ItemDto currentItem = mRecList.get(position);
         holder.mTextView4.setText(currentItem.getProd());
         holder.mTextView5.setText(currentItem.getModel());
+        if (currentItem.getTyp().toString().equals("N")){
+            holder.mImageView.setImageResource(R.drawable.ic_headset_black_24dp);
+        } else{
+            holder.mImageView.setImageResource(R.drawable.ic_hearing_black_24dp);
+        }
+
+
     }
 
     @Override
