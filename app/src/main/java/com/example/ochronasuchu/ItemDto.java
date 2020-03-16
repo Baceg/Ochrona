@@ -155,4 +155,7 @@ class ItemDto {
         this.SNR = SNR;
         this.certy = certy;
     }
+
+
+
 }

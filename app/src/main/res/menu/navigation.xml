@@ -9,7 +9,7 @@
 
     <item
         android:id="@+id/navigation_moje"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_person_black_24dp"
         android:title="Moje" />
 
     <item

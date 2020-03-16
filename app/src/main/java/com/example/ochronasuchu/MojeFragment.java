@@ -19,7 +19,7 @@ public class MojeFragment extends Fragment {
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public DatabaseHelper myDB;
-
+    ArrayList<ItemDto> listaOchron;
 
 
     @Nullable
@@ -37,12 +37,20 @@ public class MojeFragment extends Fragment {
         mRecyclerView1.setLayoutManager(mLayoutManager);
         mRecyclerView1.setAdapter(mAdapter);
 
+        mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                ((MainActivity)getActivity()).replaceFragments(ElementFragment.class);
+                
+            }
+        });
+
         return view;
     }
 
     public void showRecords() {
         myDB = new DatabaseHelper(this.getActivity());
-        ArrayList<ItemDto> listaOchron = new ArrayList<>();
+        listaOchron = new ArrayList<>();
         Cursor cursor = myDB.getAllData();
         try {
             while (cursor.moveToNext()) {

@@ -2,18 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark">
+    android:background="@android:color/darker_gray">
 
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="366dp"
-        android:layout_height="102dp"
-        android:text="Info" />
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="22dp"
+        android:text="Zaktualizuj bazę danych:" />
 
     <Button
         android:id="@+id/updateButton"
         android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
-        android:text="Update" />
+        android:layout_below="@+id/textView"
+        android:text="Aktualizacja" />
+    <TextView
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/updateButton"
+        android:text="Aplikacja powstała z myślą o inspektorach BHP i pracownikach narażonych na hałas. Umożliwia łatwy dostęp do informacji, charakterystyk wybranych ochronników słuchu dostępnych na polskim rynku."
+        />
+
+
+
+
 </RelativeLayout>

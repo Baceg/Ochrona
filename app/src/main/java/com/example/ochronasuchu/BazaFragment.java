@@ -19,6 +19,8 @@ public class BazaFragment extends Fragment {
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public DatabaseHelper myDB;
+    ArrayList<ItemDto> listaOchron;
+
 
     @Nullable
     @Override
@@ -29,12 +31,19 @@ public class BazaFragment extends Fragment {
         showRecords();
         mRecyclerView1 = view.findViewById(R.id.recycler_view_baza);
         mRecyclerView1.setHasFixedSize(true);
-        myDB = new DatabaseHelper(this.getActivity());
+        //myDB = new DatabaseHelper(this.getActivity());  //drugi raz
         mLayoutManager = new LinearLayoutManager(this.getActivity());
 
         mRecyclerView1.setLayoutManager(mLayoutManager);
         mRecyclerView1.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
 
+                ((MainActivity)getActivity()).replaceFragments(ElementFragment.class);
+
+            }
+        });
 
 
         return view;
@@ -43,7 +52,7 @@ public class BazaFragment extends Fragment {
 
     public void showRecords() {
         myDB = new DatabaseHelper(this.getActivity());
-        ArrayList<ItemDto> listaOchron = new ArrayList<>();
+        listaOchron = new ArrayList<>();
         Cursor cursor = myDB.getAllData();
         try {
             while (cursor.moveToNext()) {
@@ -65,5 +74,7 @@ public class BazaFragment extends Fragment {
         mAdapter = new RecyclerAdapter(listaOchron);
         //setContentView(R.layout.activity_main);
     }
+
+
 
 }
