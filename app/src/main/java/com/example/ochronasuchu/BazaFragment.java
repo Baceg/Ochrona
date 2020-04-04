@@ -39,8 +39,8 @@ public class BazaFragment extends Fragment {
         mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                //wyjebać zmianę fragmentu, dodać okno dialogowe
 
-                ((MainActivity)getActivity()).replaceFragments(ElementFragment.class);
 
             }
         });

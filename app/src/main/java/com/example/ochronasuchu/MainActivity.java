@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(naviListener);
-
+        //żeby wyjść z białegóm gówna to wziąć
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new BazaFragment()).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener naviListener =
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-
+//funkcja zamieniająca fragment
     public void replaceFragments(Class fragmentClass) {
         Fragment fragment = null;
         try {

@@ -40,7 +40,7 @@ public class MojeFragment extends Fragment {
         mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                ((MainActivity)getActivity()).replaceFragments(ElementFragment.class);
+
                 
             }
         });
