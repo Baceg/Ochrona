@@ -31,19 +31,18 @@ public class BazaFragment extends Fragment {
         showRecords();
         mRecyclerView1 = view.findViewById(R.id.recycler_view_baza);
         mRecyclerView1.setHasFixedSize(true);
+        mAdapter = new RecyclerAdapter(getContext(),listaOchron);
         //myDB = new DatabaseHelper(this.getActivity());  //drugi raz
         mLayoutManager = new LinearLayoutManager(this.getActivity());
 
         mRecyclerView1.setLayoutManager(mLayoutManager);
         mRecyclerView1.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                //wyjebać zmianę fragmentu, dodać okno dialogowe
-
-
-            }
-        });
+       // mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+       //     @Override
+       //     public void onItemClick(int position) {
+       //         //wyjebać zmianę fragmentu, dodać okno dialogowe
+        //    }
+       // });
 
 
         return view;
@@ -71,7 +70,7 @@ public class BazaFragment extends Fragment {
         myDB.close();
         //setContentView(R.layout.fragment_baza);
 
-        mAdapter = new RecyclerAdapter(listaOchron);
+
         //setContentView(R.layout.activity_main);
     }
 
