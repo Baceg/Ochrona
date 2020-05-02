@@ -33,16 +33,9 @@ public class MojeFragment extends Fragment {
         mRecyclerView1 = view.findViewById(R.id.recycler_view_moje);
         mRecyclerView1.setHasFixedSize(true);
         mAdapter = new RecyclerAdapter(getContext(),listaOchron);
-        //myDB = new DatabaseHelper(this.getActivity()); //drugi raz?
         mLayoutManager = new LinearLayoutManager(this.getActivity());
-
         mRecyclerView1.setLayoutManager(mLayoutManager);
         mRecyclerView1.setAdapter(mAdapter);
-
-     //   mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
-     //       @Override
-     //       public void onItemClick(int position) {
-        //        });
 
         return view;
     }

@@ -81,7 +81,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         if (clickedItem.getTyp().equals("N")) {
             dialog_image_1.setImageResource(R.drawable.ic_headset_white_24dp);
         } else {
-            dialog_image_1.setImageResource(R.drawable.ic_hearing_black_24dp);
+            dialog_image_1.setImageResource(R.drawable.ic_hearing_white_24dp);
         }
 
 
