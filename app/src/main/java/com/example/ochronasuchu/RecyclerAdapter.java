@@ -2,6 +2,7 @@ package com.example.ochronasuchu;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.Viewport;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import com.jjoe64.graphview.GraphView;
 
 import java.util.ArrayList;
 
@@ -28,6 +36,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         public ImageView mImageView;
         public TextView mTextView4;
         public TextView mTextView5;
+
+
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,20 +80,60 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     private void writeDialog(ItemDto clickedItem){
         //no musi być po prostu tutaj deklaracja
-        TextView dialog_text_1 = (TextView) mDialog.findViewById(R.id.textView7);
-        TextView dialog_text_2 = (TextView) mDialog.findViewById(R.id.textView8);
+        TextView dialog_text_1 = mDialog.findViewById(R.id.textView7);
+        TextView dialog_text_2 = mDialog.findViewById(R.id.textView8);
         ImageView dialog_image_1 = mDialog.findViewById(R.id.imageView2);
+        GraphView dialog_graph = mDialog.findViewById(R.id.graph);
+        TextView dialog_text_3 = mDialog.findViewById(R.id.textView9);
+        TextView dialog_text_4 = mDialog.findViewById(R.id.textView10);
+        TextView dialog_text_5 = mDialog.findViewById(R.id.textView11);
+        TextView dialog_text_6 = mDialog.findViewById(R.id.textView12);
 
 
-        //set texty
-        dialog_text_1.setText(clickedItem.getProd());
-        dialog_text_2.setText(clickedItem.getModel());
+
+        //set obrazek i nazwa
         if (clickedItem.getTyp().equals("N")) {
             dialog_image_1.setImageResource(R.drawable.ic_headset_white_24dp);
         } else {
             dialog_image_1.setImageResource(R.drawable.ic_hearing_white_24dp);
         }
+        dialog_text_1.setText(clickedItem.getProd());
+        dialog_text_2.setText(clickedItem.getModel());
 
+
+        //graph
+        dialog_graph.removeAllSeries();
+        dialog_graph.setTitle("Charakterystyka Tłumienia");
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(125, Float.parseFloat(clickedItem.getAPV125())),
+                new DataPoint(250, Float.parseFloat(clickedItem.getAPV250())),
+                new DataPoint(500, Float.parseFloat(clickedItem.getAPV500())),
+                new DataPoint(1000, Float.parseFloat(clickedItem.getAPV1000())),
+                new DataPoint(2000, Float.parseFloat(clickedItem.getAPV2000())),
+                new DataPoint(4000, Float.parseFloat(clickedItem.getAPV4000())),
+                new DataPoint(8000, Float.parseFloat(clickedItem.getAPV8000()))
+        });
+        series.setColor(Color.RED);
+        series.setTitle("APV");
+        dialog_graph.addSeries(series);
+        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(125, Float.parseFloat(clickedItem.getMf125())),
+                new DataPoint(250, Float.parseFloat(clickedItem.getMf250())),
+                new DataPoint(500, Float.parseFloat(clickedItem.getMf500())),
+                new DataPoint(1000, Float.parseFloat(clickedItem.getMf1000())),
+                new DataPoint(2000, Float.parseFloat(clickedItem.getMf2000())),
+                new DataPoint(4000, Float.parseFloat(clickedItem.getMf4000())),
+                new DataPoint(8000, Float.parseFloat(clickedItem.getMf8000()))
+        });
+        series2.setColor(Color.BLUE);
+        series2.setTitle("Mf");
+        dialog_graph.addSeries(series2);
+        dialog_graph.getLegendRenderer().setVisible(true);
+
+        dialog_text_3.setText("H: "+clickedItem.getH());
+        dialog_text_4.setText("M: "+clickedItem.getM());
+        dialog_text_5.setText("L: "+clickedItem.getL());
+        dialog_text_6.setText("SNR: "+clickedItem.getSNR());
 
     }
 
