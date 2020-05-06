@@ -5,11 +5,11 @@
     android:background="@android:color/holo_red_light">
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_baza"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="4dp"
         android:scrollbars="vertical"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/black"/>
 </RelativeLayout>

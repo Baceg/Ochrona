@@ -3,24 +3,19 @@ package com.example.ochronasuchu;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
-import com.jjoe64.graphview.GraphView;
 
 import java.util.ArrayList;
 
@@ -36,7 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         public ImageView mImageView;
         public TextView mTextView4;
         public TextView mTextView5;
-
+        public TextView mTextView6;
 
 
         public RecyclerViewHolder(@NonNull View itemView) {
@@ -45,6 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             mImageView = itemView.findViewById(R.id.imageView);
             mTextView4 = itemView.findViewById(R.id.textView4);
             mTextView5 = itemView.findViewById(R.id.textView5);
+            mTextView6 = itemView.findViewById(R.id.textView6);
 
         }
     }
@@ -145,6 +141,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         ItemDto currentItem = mRecList.get(position);
         holder.mTextView4.setText(currentItem.getProd());
         holder.mTextView5.setText(currentItem.getModel());
+        holder.mTextView6.setText("H: "+currentItem.getH()+" M: "+currentItem.getM()+" L: "+currentItem.getL());
         if (currentItem.getTyp().equals("N")){
             holder.mImageView.setImageResource(R.drawable.ic_headset_black_24dp);
         } else{
