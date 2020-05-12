@@ -143,10 +143,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         holder.mTextView5.setText(currentItem.getModel());
         holder.mTextView6.setText("H: "+currentItem.getH()+" M: "+currentItem.getM()+" L: "+currentItem.getL());
         if (currentItem.getTyp().equals("N")){
-            holder.mImageView.setImageResource(R.drawable.ic_headset_black_24dp);
-        } else{
+            if (currentItem.getCerty().equals("user"))
+                holder.mImageView.setImageResource(R.drawable.ic_headset_gold_24dp);
+            else
+                holder.mImageView.setImageResource(R.drawable.ic_headset_black_24dp);
+        } else
+            if (currentItem.getCerty().equals("user"))
+                holder.mImageView.setImageResource(R.drawable.ic_hearing_gold_24dp);
+            else
             holder.mImageView.setImageResource(R.drawable.ic_hearing_black_24dp);
-        }
 
 
     }

@@ -1,6 +1,8 @@
 package com.example.ochronasuchu;
 
-class ItemDto {
+import java.io.Serializable;
+
+public class ItemDto implements Serializable {
 
     public String getMf125() {
         return Mf125;
@@ -150,8 +152,8 @@ class ItemDto {
         this.APV4000 = APV4000;
         this.APV8000 = APV8000;
         this.H = H;
-        this.M = H;
-        this.L = H;
+        this.M = M;
+        this.L = L;
         this.SNR = SNR;
         this.certy = certy;
     }

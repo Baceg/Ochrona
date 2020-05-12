@@ -4,24 +4,28 @@
 
     <item android:id="@+id/add"
         android:icon="@drawable/ic_add_white_24dp"
-        android:title="Add"
+        android:title="Dodaj"
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/item2"
         android:icon="@drawable/ic_sort_white_24dp"
-        android:title="Item 2"
+        android:title="Sortuj"
         app:showAsAction="ifRoom">
         <menu>
             <item android:id="@+id/item3"
-                android:title="Alfabetycznie Producent"
+                android:title="Producent"
                 app:showAsAction="never"/>
 
             <item android:id="@+id/item4"
-            android:title="Item 4"
+            android:title="H"
             app:showAsAction="never"/>
 
             <item android:id="@+id/item5"
-                android:title="Item 5"
+                android:title="M"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item6"
+                android:title="L"
                 app:showAsAction="never"/>
 
         </menu>

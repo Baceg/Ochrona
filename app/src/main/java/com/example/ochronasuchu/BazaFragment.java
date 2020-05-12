@@ -15,38 +15,39 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class BazaFragment extends Fragment {
+public class BazaFragment extends Fragment implements UpdateInterface {
 
     private RecyclerView mRecyclerView1;
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    public DatabaseHelper myDB;
-    ArrayList<ItemDto> listaOchron;
+    //public DatabaseHelper myDB;
+    //ArrayList<ItemDto> lista;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        showRecords();
-        super.onCreate(savedInstanceState);
-    }
+
+
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState ) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_baza, container, false);
 
-        showRecords();
-        //sortRecordsByProd();
+        ArrayList<ItemDto> mlist = (ArrayList<ItemDto>) getArguments().getSerializable("bundle_key");
+
         mRecyclerView1 = view.findViewById(R.id.recycler_view_baza);
         mRecyclerView1.setHasFixedSize(true);
-        mAdapter = new RecyclerAdapter(getContext(),listaOchron);
+        mAdapter = new RecyclerAdapter(getContext(),mlist);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView1.setLayoutManager(mLayoutManager);
         mRecyclerView1.setAdapter(mAdapter);
         return view;
     }
 
-    public void sortRecordsByProd(){
+    public void updateData(){
+        mAdapter.notifyDataSetChanged();
+    }
+
+ /*   public void sortRecordsByProd(){
         Collections.sort(listaOchron, new Comparator<ItemDto>() {
             @Override
             public int compare(ItemDto o1, ItemDto o2) {
@@ -56,9 +57,9 @@ public class BazaFragment extends Fragment {
         mAdapter = new RecyclerAdapter(getContext(),listaOchron);
 
     }
+*/
 
-
-    public void showRecords() {
+ /*   public void showRecords() {
         myDB = new DatabaseHelper(this.getActivity());
         listaOchron = new ArrayList<>();
         Cursor cursor = myDB.getAllData();
@@ -82,6 +83,6 @@ public class BazaFragment extends Fragment {
         //setContentView(R.layout.activity_main);
     }
 
-
+*/
 
 }
