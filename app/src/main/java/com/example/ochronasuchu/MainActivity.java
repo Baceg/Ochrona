@@ -7,7 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import java.util.Collections;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,12 +26,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(naviListener);
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        navigation.setOnNavigationItemSelectedListener(naviListener);
+
         //żeby wyjść z białegóm gówna to wziąć
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new BazaFragment()).commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menus,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.add:
+                //showDialogAdd();
+                return true;
+            case R.id.item3:
+                //new BazaFragment().sortRecordsByProd();
+                //getSupportFragmentManager().findFragmentById(new BazaFragment())
+                return true;
+            case R.id.item4:
+                return true;
+            case R.id.item5:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener naviListener =

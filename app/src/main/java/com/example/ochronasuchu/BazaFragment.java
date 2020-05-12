@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class BazaFragment extends Fragment {
 
@@ -21,6 +23,11 @@ public class BazaFragment extends Fragment {
     public DatabaseHelper myDB;
     ArrayList<ItemDto> listaOchron;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        showRecords();
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -29,15 +36,25 @@ public class BazaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_baza, container, false);
 
         showRecords();
+        //sortRecordsByProd();
         mRecyclerView1 = view.findViewById(R.id.recycler_view_baza);
         mRecyclerView1.setHasFixedSize(true);
         mAdapter = new RecyclerAdapter(getContext(),listaOchron);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView1.setLayoutManager(mLayoutManager);
         mRecyclerView1.setAdapter(mAdapter);
-
-
         return view;
+    }
+
+    public void sortRecordsByProd(){
+        Collections.sort(listaOchron, new Comparator<ItemDto>() {
+            @Override
+            public int compare(ItemDto o1, ItemDto o2) {
+                return o1.getProd().compareTo(o2.getProd());
+            }
+        });
+        mAdapter = new RecyclerAdapter(getContext(),listaOchron);
+
     }
 
 
@@ -53,7 +70,6 @@ public class BazaFragment extends Fragment {
                         cursor.getString(18), cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23),
                         cursor.getString(24), cursor.getString(25), cursor.getString(26), cursor.getString(27), cursor.getString(28), cursor.getString(29)));
             }
-
         } finally {
             if (cursor != null && !cursor.isClosed())
                 cursor.close();
