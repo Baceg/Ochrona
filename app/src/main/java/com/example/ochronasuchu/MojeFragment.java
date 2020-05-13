@@ -41,7 +41,7 @@ public class MojeFragment extends Fragment implements UpdateInterface {
         return view;
     }
 
-    public void updateData(){
+    public void updateRecycler(){
         mAdapter.notifyDataSetChanged();
     }
 
