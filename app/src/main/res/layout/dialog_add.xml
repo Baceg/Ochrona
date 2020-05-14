@@ -4,42 +4,353 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:id="@+id/dialog"
-    android:background="#232323">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
-        <TextView
-            android:textColor="@android:color/white"
-            android:text="Mf"
-            android:textSize="20dp"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" />
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/layout_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="Producent:"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="Producent"
+                    android:maxLength="30"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_prod"
+                    android:layout_width="160sp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/layout_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="Model:"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="Model"
+                    android:maxLength="30"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_model"
+                    android:layout_width="160sp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp">
+                <RadioButton
+                    android:id="@+id/radio_nausznik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nausznik"
+                    android:onClick="checkButton"
+                    android:checked="true"/>
+                <RadioButton
+                    android:id="@+id/radio_wkladka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wkładka"
+                    android:onClick="checkButton"/>
 
 
 
+
+            </RadioGroup>
+        </RelativeLayout>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="Hz:"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="125"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="250"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="500"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="1k"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="2k"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="4k"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="8k"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="Mf:"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="mf125"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_mf125"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="mf250"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_mf250"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="mf500"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_mf500"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="mf1000"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_mf1000"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="mf2000"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_mf2000"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="mf4000"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_mf4000"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="mf8000"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_mf8000"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="AVP:"
+                    android:textSize="18sp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="avp125"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_avp125"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="avp250"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_avp250"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="avp500"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_avp500"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="avp1000"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_avp1000"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="avp2000"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_avp2000"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="avp4000"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_avp4000"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="avp8000"
+                    android:maxLength="4"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_avp8000"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="H:"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="H"
+                    android:maxLength="2"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_H"
+                    android:inputType="number"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="M:"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="M"
+                    android:maxLength="2"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_M"
+                    android:inputType="number"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="L:"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="L"
+                    android:maxLength="2"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_L"
+                    android:inputType="number"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="SNR:"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:autofillHints="SNR"
+                    android:maxLength="2"
+                    android:textSize="16sp"
+                    android:id="@+id/edit_SNR"
+                    android:inputType="number"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 </RelativeLayout>

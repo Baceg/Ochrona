@@ -29,7 +29,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public DatabaseHelper myDB;
+    //public DatabaseHelper myDB;
     private ArrayList<ItemDto> listaOchron;
     private ArrayList<ItemDto> listaOchronUser;
     private UpdateInterface listener;
@@ -72,10 +72,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.add:
-                //showDialogAdd();
+                showDialogAdd();
                 writeRecords();
                 writeRecordsUser();
-
                 return true;
             case R.id.item3:
                 sortRecordsByProd();
@@ -149,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeRecords() {
-        myDB = new DatabaseHelper(this);
+        DatabaseHelper myDB = new DatabaseHelper(this);
         listaOchron = new ArrayList<>();
         Cursor cursor = myDB.getAllData();
         try {
@@ -168,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeRecordsUser() {
-        myDB = new DatabaseHelper(this);
+        DatabaseHelper myDB = new DatabaseHelper(this);
         listaOchronUser = new ArrayList<>();
         Cursor cursor = myDB.getAllData();
         try {
@@ -187,6 +186,16 @@ public class MainActivity extends AppCompatActivity {
         }
         myDB.close();
     }
+
+    public void showDialogAdd(){
+        AddItemDialog addItemDialog = new AddItemDialog();
+        addItemDialog.show(getSupportFragmentManager(),"add dialog");
+
+    }
+
+
+
+
 
     public void sortRecordsByProd(){
         Collections.sort(listaOchron, new Comparator<ItemDto>() {
@@ -312,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
 
+                                        DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
                                         //dataInserted = false;
                                         if (addressList != null) {
                                             deletedRows = myDB.deleteWebData();
@@ -322,8 +332,8 @@ public class MainActivity extends AppCompatActivity {
                                                         addressList.get(i * 29 + 18), addressList.get(i * 29 + 19), addressList.get(i * 29 + 20), addressList.get(i * 29 + 21), addressList.get(i * 29 + 22), addressList.get(i * 29 + 23),
                                                         addressList.get(i * 29 + 24), addressList.get(i * 29 + 25), addressList.get(i * 29 + 26), addressList.get(i * 29 + 27), addressList.get(i * 29 + 28));
                                             dataInserted = true;
-
                                         }
+                                        myDB.close();
                                         if (deletedRows > 0 && dataInserted == true) {
                                             Toast.makeText(getApplicationContext(), "Aktualizacja ukończona pomyślnie", Toast.LENGTH_SHORT).show();
                                         } else if (deletedRows > 0 && dataInserted == false ) {
