@@ -64,7 +64,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         rvh.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"TEST CLICK "+String.valueOf(rvh.getAdapterPosition()),Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(mContext,"TEST CLICK "+String.valueOf(rvh.getAdapterPosition()),Toast.LENGTH_SHORT).show();
                 ItemDto clickedItem = mRecList.get(rvh.getAdapterPosition());
                 writeDialog(clickedItem);
                 mDialog.show();

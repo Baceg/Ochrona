@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ItemDto> listaOchron;
     private ArrayList<ItemDto> listaOchronUser;
     private UpdateInterface listener;
+    String adderTyp = "N";
+
+
 
     Boolean dataInserted = false;
     Integer deletedRows = 0;
@@ -73,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.add:
                 showDialogAdd();
-                writeRecords();
-                writeRecordsUser();
+                listener.updateRecycler();
+                adderTyp = "N";
+                //Toast.makeText(getApplicationContext(), typ, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item3:
                 sortRecordsByProd();
@@ -351,6 +356,32 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         }).start();
+    }
+
+    public void addToDatabase(ArrayList<String> list){
+        DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
+        if (list != null) {
+            myDB.insertData(adderTyp,list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5), list.get(6), list.get(7), list.get(8), list.get(9), list.get(10), list.get(11), list.get(12),
+                    list.get(13), list.get(14), list.get(15), list.get(16), list.get(17), list.get(18), list.get(19), list.get(20), list.get(21), list.get(22), list.get(23), list.get(24),
+                    list.get(25), list.get(26),  "user");
+
+        }
+        myDB.close();
+    }
+
+
+    public void onRadioButtonClicked(View view){
+        boolean checked = ((RadioButton) view).isChecked();
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_nausznik:
+                adderTyp = "N";
+                break;
+            case R.id.radio_wkladka:
+                if (checked)
+                    adderTyp = "W";
+                    break;
+        }
 
 
     }
