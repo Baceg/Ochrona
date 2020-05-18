@@ -157,7 +157,12 @@ public class MainActivity extends AppCompatActivity {
 // metoda odczytuje z bd i wrzuca do listyOchron a listę ochron do fragmentu
     public void writeRecords() {
         DatabaseHelper myDB = new DatabaseHelper(this);
-        listaOchron = new ArrayList<>();
+        if (listaOchron != null){
+            listaOchron.clear();
+        } else{
+            listaOchron = new ArrayList<>();
+        }
+
         Cursor cursor = myDB.getAllData();
         try {
             while (cursor.moveToNext()) {
@@ -181,7 +186,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void writeRecordsUser() {
         DatabaseHelper myDB = new DatabaseHelper(this);
-        listaOchronUser = new ArrayList<>();
+        if (listaOchronUser != null){
+            listaOchronUser.clear();
+        } else{
+            listaOchronUser = new ArrayList<>();
+        }
+
         Cursor cursor = myDB.getAllData();
         try {
             while (cursor.moveToNext()) {

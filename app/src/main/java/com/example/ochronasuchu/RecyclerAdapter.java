@@ -142,7 +142,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         dialog_button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //((MainActivity)getActivity()).updateData();
+
             }
         });
     }
