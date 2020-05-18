@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class AddItemDialog extends AppCompatDialogFragment {
 
-
     private EditText editTextMf125;
     private EditText editTextMf250;
     private EditText editTextMf500;
@@ -41,8 +40,8 @@ public class AddItemDialog extends AppCompatDialogFragment {
     private EditText editTextProd;
     private EditText editTextModel;
     private RadioGroup radioGroup;
-    private RadioButton radioWkladka;
-    private RadioButton radioNausznik;
+  //  private RadioButton radioWkladka;
+ //   private RadioButton radioNausznik;
     public ArrayList<String> data = new ArrayList<String>();
 
 
@@ -57,6 +56,8 @@ public class AddItemDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialog = inflater.inflate(R.layout.dialog_add,null);
 
+
+
         builder.setView(dialog)
                 .setTitle("Dodaj")
                 .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
@@ -69,26 +70,26 @@ public class AddItemDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if (editTextProd.getText().equals("")) editTextProd.setText("-");
-                        if (editTextModel.getText().equals("")) editTextModel.setText("-");
-                        if (editTextMf125.getText().equals("")) editTextMf125.setText("0");
-                        if (editTextMf250.getText().equals("")) editTextMf250.setText("0");
-                        if (editTextMf500.getText().equals("")) editTextMf500.setText("0");
-                        if (editTextMf1000.getText().equals("")) editTextMf1000.setText("0");
-                        if (editTextMf2000.getText().equals("")) editTextMf2000.setText("0");
-                        if (editTextMf4000.getText().equals("")) editTextMf4000.setText("0");
-                        if (editTextMf8000.getText().equals("")) editTextMf8000.setText("0");
-                        if (editTextAvp125.getText().equals("")) editTextAvp125.setText("0");
-                        if (editTextAvp250.getText().equals("")) editTextAvp250.setText("0");
-                        if (editTextAvp500.getText().equals("")) editTextAvp500.setText("0");
-                        if (editTextAvp1000.getText().equals("")) editTextAvp1000.setText("0");
-                        if (editTextAvp2000.getText().equals("")) editTextAvp2000.setText("0");
-                        if (editTextAvp4000.getText().equals("")) editTextAvp4000.setText("0");
-                        if (editTextAvp8000.getText().equals("")) editTextAvp8000.setText("0");
-                        if (editTextH.getText().equals("")) editTextH.setText("0");
-                        if (editTextM.getText().equals("")) editTextM.setText("0");
-                        if (editTextL.getText().equals("")) editTextL.setText("0");
-                        if (editTextSNR.getText().equals("")) editTextSNR.setText("0");
+                        if (editTextProd.getText().toString().equals("")) editTextProd.setText("-");
+                        if (editTextModel.getText().toString().equals("")) editTextModel.setText("-");
+                        if (editTextMf125.getText().toString().equals("")) editTextMf125.setText("0");
+                        if (editTextMf250.getText().toString().equals("")) editTextMf250.setText("0");
+                        if (editTextMf500.getText().toString().equals("")) editTextMf500.setText("0");
+                        if (editTextMf1000.getText().toString().equals("")) editTextMf1000.setText("0");
+                        if (editTextMf2000.getText().toString().equals("")) editTextMf2000.setText("0");
+                        if (editTextMf4000.getText().toString().equals("")) editTextMf4000.setText("0");
+                        if (editTextMf8000.getText().toString().equals("")) editTextMf8000.setText("0");
+                        if (editTextAvp125.getText().toString().equals("")) editTextAvp125.setText("0");
+                        if (editTextAvp250.getText().toString().equals("")) editTextAvp250.setText("0");
+                        if (editTextAvp500.getText().toString().equals("")) editTextAvp500.setText("0");
+                        if (editTextAvp1000.getText().toString().equals("")) editTextAvp1000.setText("0");
+                        if (editTextAvp2000.getText().toString().equals("")) editTextAvp2000.setText("0");
+                        if (editTextAvp4000.getText().toString().equals("")) editTextAvp4000.setText("0");
+                        if (editTextAvp8000.getText().toString().equals("")) editTextAvp8000.setText("0");
+                        if (editTextH.getText().toString().equals("")) editTextH.setText("0");
+                        if (editTextM.getText().toString().equals("")) editTextM.setText("0");
+                        if (editTextL.getText().toString().equals("")) editTextL.setText("0");
+                        if (editTextSNR.getText().toString().equals("")) editTextSNR.setText("0");
 
                         data.add(editTextProd.getText().toString());
                         data.add(editTextModel.getText().toString());
@@ -120,6 +121,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         ((MainActivity)getActivity()).addToDatabase(data);
                         ((MainActivity) getActivity()).writeRecords();
                         ((MainActivity) getActivity()).writeRecordsUser();
+                        ((MainActivity) getActivity()).refreshRecycler();
                     }
                 });
 

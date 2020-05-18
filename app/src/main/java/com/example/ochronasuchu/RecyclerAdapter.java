@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +72,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             }
         });
 
+
         return rvh;
     }
 
@@ -84,7 +86,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         TextView dialog_text_4 = mDialog.findViewById(R.id.textView10);
         TextView dialog_text_5 = mDialog.findViewById(R.id.textView11);
         TextView dialog_text_6 = mDialog.findViewById(R.id.textView12);
-
+        Button dialog_button_delete = mDialog.findViewById(R.id.delete_button);
 
 
         //set obrazek i nazwa
@@ -131,6 +133,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         dialog_text_5.setText("L: "+clickedItem.getL());
         dialog_text_6.setText("SNR: "+clickedItem.getSNR());
 
+        if (clickedItem.getCerty().equals("user")){
+            dialog_button_delete.setVisibility(View.VISIBLE);
+        } else {
+            dialog_button_delete.setVisibility(View.GONE);
+        }
+
+        dialog_button_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //((MainActivity)getActivity()).updateData();
+            }
+        });
     }
 
 

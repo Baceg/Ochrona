@@ -55,10 +55,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //żeby wyjść z białegóm gówna to wziąć
+
 
         BazaFragment bz_fragment = new BazaFragment();
         setListener(bz_fragment);
+
+
+
+        //żeby wyjść z białegóm gówna to wziąć
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,bz_fragment).commit();
         Bundle bundle = new Bundle();
         bundle.putSerializable("bundle_key", listaOchron);
@@ -77,29 +81,27 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.add:
                 showDialogAdd();
-                listener.updateRecycler();
                 adderTyp = "N";
-                //Toast.makeText(getApplicationContext(), typ, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item3:
                 sortRecordsByProd();
                 sortUserRecordsByProd();
-                listener.updateRecycler();
+                refreshRecycler();
                 return true;
             case R.id.item4:
                 sortRecordsByH();
                 sortUserRecordsByH();
-                listener.updateRecycler();
+                refreshRecycler();
                 return true;
             case R.id.item5:
                 sortRecordsByM();
                 sortUserRecordsByM();
-                listener.updateRecycler();
+                refreshRecycler();
                 return true;
             case R.id.item6:
                 sortRecordsByL();
                 sortUserRecordsByL();
-                listener.updateRecycler();
+                refreshRecycler();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -107,6 +109,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //funkcja zamieniająca fragment
+    public void replaceFragments(Class fragmentClass) {
+        Fragment fragment = null;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+                .commit();
+    }
     private BottomNavigationView.OnNavigationItemSelectedListener naviListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -138,20 +153,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-//funkcja zamieniająca fragment
-    public void replaceFragments(Class fragmentClass) {
-        Fragment fragment = null;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
-                .commit();
-    }
 
+// metoda odczytuje z bd i wrzuca do listyOchron a listę ochron do fragmentu
     public void writeRecords() {
         DatabaseHelper myDB = new DatabaseHelper(this);
         listaOchron = new ArrayList<>();
@@ -169,6 +172,11 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
         }
         myDB.close();
+
+        Fragment fragment = new BazaFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("bundle_key", listaOchron);
+        fragment.setArguments(bundle);
     }
 
     public void writeRecordsUser() {
@@ -190,6 +198,11 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
         }
         myDB.close();
+
+        Fragment fragment = new MojeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("bundle_key", listaOchronUser);
+        fragment.setArguments(bundle);
     }
 
     public void showDialogAdd(){
@@ -197,10 +210,6 @@ public class MainActivity extends AppCompatActivity {
         addItemDialog.show(getSupportFragmentManager(),"add dialog");
 
     }
-
-
-
-
 
     public void sortRecordsByProd(){
         Collections.sort(listaOchron, new Comparator<ItemDto>() {
@@ -210,7 +219,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortUserRecordsByProd(){
         Collections.sort(listaOchronUser, new Comparator<ItemDto>() {
             @Override
@@ -227,7 +235,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortUserRecordsByH(){
         Collections.sort(listaOchronUser, new Comparator<ItemDto>() {
             @Override
@@ -236,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortRecordsByM(){
         Collections.sort(listaOchron, new Comparator<ItemDto>() {
             @Override
@@ -245,7 +251,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortUserRecordsByM(){
         Collections.sort(listaOchronUser, new Comparator<ItemDto>() {
             @Override
@@ -254,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortRecordsByL(){
         Collections.sort(listaOchron, new Comparator<ItemDto>() {
             @Override
@@ -263,7 +267,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortUserRecordsByL(){
         Collections.sort(listaOchronUser, new Comparator<ItemDto>() {
             @Override
@@ -276,9 +279,9 @@ public class MainActivity extends AppCompatActivity {
     public void setListener(UpdateInterface listener){
         this.listener = listener;
     }
-
-
-
+    public void refreshRecycler(){
+        listener.updateRecycler();
+    }
 
     public boolean isInternetAvailable(String urlString) {
         try {
@@ -367,8 +370,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         myDB.close();
-    }
-
+}
 
     public void onRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
