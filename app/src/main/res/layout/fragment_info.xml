@@ -25,9 +25,16 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_below="@+id/updateButton"
-        android:text="Aplikacja powstała z myślą o inspektorach BHP i pracownikach narażonych na hałas. Umożliwia łatwy dostęp do informacji, charakterystyk wybranych ochronników słuchu dostępnych na polskim rynku."
+        android:text="Aplikacja powstała z myślą o inspektorach BHP i pracownikach narażonych na hałas. Umożliwia łatwy dostęp do informacji, charakterystyk wybranych ochronników słuchu dostępnych na polskim rynku"
         />
 
+    <TextView
+        android:id="@+id/textViewInfo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adam Goszkowski 2020" />
 
 
 

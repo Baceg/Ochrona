@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                final List<String> addressList = getTextFromWeb("http://10.0.2.2/ochslu/");
+                                final List<String> addressList = getTextFromWeb("http://192.168.0.227/ochslu/");
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -381,6 +381,19 @@ public class MainActivity extends AppCompatActivity {
         }
         myDB.close();
 }
+
+    public void deleteFromDatabase(ArrayList<String> list){
+        DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
+        if (list != null) {
+            myDB.deleteRecord(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5),list.get(6),list.get(7), list.get(8),list.get(9),list.get(10),
+                    list.get(11),list.get(12),list.get(13),list.get(14),list.get(15),list.get(16),list.get(17),list.get(18),list.get(19),list.get(20));
+        }
+        myDB.close();
+    }
+    public void clearDatabase(){
+        DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
+        myDB.deleteWebData();
+    }
 
     public void onRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();

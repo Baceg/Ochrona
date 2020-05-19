@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -22,8 +21,8 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
     private ArrayList<ItemDto> mRecList;
-    Context mContext;
-    Dialog mDialog;
+    private Context mContext;
+    private Dialog mDialog;
 
 
 
@@ -61,12 +60,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         //Dialog ini
         mDialog = new Dialog(mContext);
         mDialog.setContentView(R.layout.item_dialog);
-        //onclick na elemencie
+
         rvh.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
         //        Toast.makeText(mContext,"TEST CLICK "+String.valueOf(rvh.getAdapterPosition()),Toast.LENGTH_SHORT).show();
                 ItemDto clickedItem = mRecList.get(rvh.getAdapterPosition());
+
+
                 writeDialog(clickedItem);
                 mDialog.show();
             }
@@ -76,7 +77,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         return rvh;
     }
 
-    private void writeDialog(ItemDto clickedItem){
+    private void writeDialog(final ItemDto clickedItem){
         //no musi być po prostu tutaj deklaracja
         TextView dialog_text_1 = mDialog.findViewById(R.id.textView7);
         TextView dialog_text_2 = mDialog.findViewById(R.id.textView8);
@@ -142,7 +143,33 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         dialog_button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ArrayList<String> list = new ArrayList<String>();
+                list.add(clickedItem.getTyp());
+                list.add(clickedItem.getProd());
+                list.add(clickedItem.getModel());
+                list.add(clickedItem.getMf125());
+                list.add(clickedItem.getMf250());
+                list.add(clickedItem.getMf500());
+                list.add(clickedItem.getMf1000());
+                list.add(clickedItem.getMf2000());
+                list.add(clickedItem.getMf4000());
+                list.add(clickedItem.getMf8000());
+                list.add(clickedItem.getAPV125());
+                list.add(clickedItem.getAPV250());
+                list.add(clickedItem.getAPV500());
+                list.add(clickedItem.getAPV1000());
+                list.add(clickedItem.getAPV2000());
+                list.add(clickedItem.getAPV4000());
+                list.add(clickedItem.getAPV8000());
+                list.add(clickedItem.getH());
+                list.add(clickedItem.getM());
+                list.add(clickedItem.getL());
+                list.add(clickedItem.getSNR());
+                ((MainActivity)mContext).deleteFromDatabase(list);
+                ((MainActivity)mContext).writeRecordsUser();
+                ((MainActivity)mContext).writeRecords();
+                ((MainActivity)mContext).refreshRecycler();
+                mDialog.dismiss();
             }
         });
     }
