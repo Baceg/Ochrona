@@ -8,38 +8,38 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "ochronnik.db";
-    public static final String TABLE_NAME = "ochronniki_table";
-    public static final String COL_1 = "id";
-    public static final String COL_2 = "typ";
-    public static final String COL_3 = "prod";
-    public static final String COL_4 = "model";
-    public static final String COL_5 = "Mf125";
-    public static final String COL_6 = "Mf250";
-    public static final String COL_7 = "Mf500";
-    public static final String COL_8 = "Mf1000";
-    public static final String COL_9 = "Mf2000";
-    public static final String COL_10 = "Mf4000";
-    public static final String COL_11 = "Mf8000";
-    public static final String COL_12 = "sf125";
-    public static final String COL_13 = "sf250";
-    public static final String COL_14 = "sf500";
-    public static final String COL_15 = "sf1000";
-    public static final String COL_16 = "sf2000";
-    public static final String COL_17 = "sf4000";
-    public static final String COL_18 = "sf8000";
-    public static final String COL_19 = "APV125";
-    public static final String COL_20 = "APV250";
-    public static final String COL_21 = "APV500";
-    public static final String COL_22 = "APV1000";
-    public static final String COL_23 = "APV2000";
-    public static final String COL_24 = "APV4000";
-    public static final String COL_25 = "APV8000";
-    public static final String COL_26 = "H";
-    public static final String COL_27 = "M";
-    public static final String COL_28 = "L";
-    public static final String COL_29 = "SNR";
-    public static final String COL_30 = "Certyfikat";
+    private static final String DATABASE_NAME = "ochronnik.db";
+    private static final String TABLE_NAME = "ochronniki_table";
+    private static final String COL_1 = "id";
+    private static final String COL_2 = "typ";
+    private static final String COL_3 = "prod";
+    private static final String COL_4 = "model";
+    private static final String COL_5 = "Mf125";
+    private static final String COL_6 = "Mf250";
+    private static final String COL_7 = "Mf500";
+    private static final String COL_8 = "Mf1000";
+    private static final String COL_9 = "Mf2000";
+    private static final String COL_10 = "Mf4000";
+    private static final String COL_11 = "Mf8000";
+    private static final String COL_12 = "sf125";
+    private static final String COL_13 = "sf250";
+    private static final String COL_14 = "sf500";
+    private static final String COL_15 = "sf1000";
+    private static final String COL_16 = "sf2000";
+    private static final String COL_17 = "sf4000";
+    private static final String COL_18 = "sf8000";
+    private static final String COL_19 = "APV125";
+    private static final String COL_20 = "APV250";
+    private static final String COL_21 = "APV500";
+    private static final String COL_22 = "APV1000";
+    private static final String COL_23 = "APV2000";
+    private static final String COL_24 = "APV4000";
+    private static final String COL_25 = "APV8000";
+    private static final String COL_26 = "H";
+    private static final String COL_27 = "M";
+    private static final String COL_28 = "L";
+    private static final String COL_29 = "SNR";
+    private static final String COL_30 = "Certyfikat";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -66,14 +66,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists " + TABLE_NAME);
         onCreate(db);
     }
-
+    //Dodaj jeden rekord
     public boolean insertData(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                               String sf125, String sf250, String sf500, String sf1000, String sf2000, String sf4000, String sf8000,
                               String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
                               String H, String M, String L, String SNR,String Certyfikat) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-
         contentValues.put(COL_2, typ);
         contentValues.put(COL_3, prod);
         contentValues.put(COL_4, model);
@@ -108,19 +107,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         else
             return true;
-
     }
-
-    public Integer deleteAllData(String prod, String model) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "prod = ? and model = ?", new String[]{prod, model});
-    }
-
+    //Usuń wszystkie rekordy poza tymi użytkownika
     public Integer deleteWebData() {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "Certyfikat != ?", new String[] {"user"});
     }
-
+    //Usuń konkretny rekord
     public Integer deleteRecord(String typ, String prod, String model,
                                 String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                                 String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,

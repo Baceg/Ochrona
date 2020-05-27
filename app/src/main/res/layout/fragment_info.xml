@@ -6,26 +6,29 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView1"
+        android:layout_marginTop="220dp"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_height="22dp"
+        android:layout_above="@+id/updateButton"
         android:text="Zaktualizuj bazę danych:" />
 
     <Button
         android:id="@+id/updateButton"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
+        android:layout_above="@+id/textView2"
         android:text="Aktualizacja" />
     <TextView
+        android:id="@+id/textView2"
         android:layout_margin="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/updateButton"
-        android:text="Aplikacja powstała z myślą o inspektorach BHP i pracownikach narażonych na hałas. Umożliwia łatwy dostęp do informacji, charakterystyk wybranych ochronników słuchu dostępnych na polskim rynku"
+        android:gravity="center"
+        android:text="Aplikacja powstała z myślą o inspektorach BHP i pracownikach narażonych na hałas. Umożliwia łatwy dostęp do informacji, charakterystyk wybranych ochronników słuchu dostępnych na polskim rynku."
         />
 
     <TextView
@@ -34,6 +37,7 @@
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:longClickable="true"
         android:text="Adam Goszkowski 2020" />
 
 

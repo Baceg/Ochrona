@@ -1,8 +1,8 @@
 package com.example.ochronasuchu;
 
 import java.io.Serializable;
-
-public class ItemDto implements Serializable {
+//ItemHearingProtector przechowuje informacje już po odczytaniu z bazy danych
+public class ItemHearingProtector implements Serializable {
 
     public String getMf125() {
         return Mf125;
@@ -92,7 +92,6 @@ public class ItemDto implements Serializable {
         return certy;
     }
 
-
     private String typ;
     private String prod;
     private String model;
@@ -123,10 +122,10 @@ public class ItemDto implements Serializable {
     private String SNR;
     private String certy;
 
-    public ItemDto(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
-                   String sf125, String sf250, String sf500, String sf1000, String sf2000, String sf4000, String sf8000,
-                   String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
-                   String H, String M, String L, String SNR, String certy) {
+    public ItemHearingProtector(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
+                                String sf125, String sf250, String sf500, String sf1000, String sf2000, String sf4000, String sf8000,
+                                String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
+                                String H, String M, String L, String SNR, String certy) {
         this.typ = typ;
         this.prod = prod;
         this.model = model;

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:id="@+id/card_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="8dp">
+    android:background="@android:color/darker_gray"
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"

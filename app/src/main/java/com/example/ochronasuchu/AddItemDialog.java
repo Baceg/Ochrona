@@ -4,19 +4,13 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-
 import java.util.ArrayList;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
-
+//AddItemDialog obsługuje formularz z dodawnaiem ochronnika do bazy
 public class AddItemDialog extends AppCompatDialogFragment {
 
     private EditText editTextMf125;
@@ -39,37 +33,26 @@ public class AddItemDialog extends AppCompatDialogFragment {
     private EditText editTextSNR;
     private EditText editTextProd;
     private EditText editTextModel;
-    private RadioGroup radioGroup;
-  //  private RadioButton radioWkladka;
- //   private RadioButton radioNausznik;
     public ArrayList<String> data = new ArrayList<String>();
-
-
-
-
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialog = inflater.inflate(R.layout.dialog_add,null);
-
-
 
         builder.setView(dialog)
                 .setTitle("Dodaj")
                 .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        //Zamiana niewypełnionych miejsc w formularzu na 0 (wykeres nie poradziłby sobie z wartościami null, i baza danych ich nie lubi)
                         if (editTextProd.getText().toString().equals("")) editTextProd.setText("-");
                         if (editTextModel.getText().toString().equals("")) editTextModel.setText("-");
                         if (editTextMf125.getText().toString().equals("")) editTextMf125.setText("0");
@@ -90,7 +73,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         if (editTextM.getText().toString().equals("")) editTextM.setText("0");
                         if (editTextL.getText().toString().equals("")) editTextL.setText("0");
                         if (editTextSNR.getText().toString().equals("")) editTextSNR.setText("0");
-
+                        //wprowadenie wartości do listy która będzie przekazana do bazy danych
                         data.add(editTextProd.getText().toString());
                         data.add(editTextModel.getText().toString());
                         data.add(editTextMf125.getText().toString());
@@ -118,13 +101,16 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         data.add(editTextM.getText().toString());
                         data.add(editTextL.getText().toString());
                         data.add(editTextSNR.getText().toString());
+                        //wpisanie do bazy danych
                         ((MainActivity)getActivity()).addToDatabase(data);
+                        //odczytanie z bazy danych
                         ((MainActivity) getActivity()).writeRecords();
                         ((MainActivity) getActivity()).writeRecordsUser();
+                        //odświerzenie tego co się wyświetla
                         ((MainActivity) getActivity()).refreshRecycler();
                     }
                 });
-
+        //podłączenie layoutu do klasy, ustalenie filtrów na formularzach
         editTextProd = dialog.findViewById(R.id.edit_prod);
         editTextModel = dialog.findViewById(R.id.edit_model);
         editTextMf125 = dialog.findViewById(R.id.edit_mf125);
@@ -159,12 +145,8 @@ public class AddItemDialog extends AppCompatDialogFragment {
         editTextM = dialog.findViewById(R.id.edit_M);
         editTextL = dialog.findViewById(R.id.edit_L);
         editTextSNR = dialog.findViewById(R.id.edit_SNR);
-        radioGroup = dialog.findViewById(R.id.radio_group);
-
 
         return builder.create();
     }
-
-
 
 }

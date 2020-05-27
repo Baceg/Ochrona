@@ -1,13 +1,11 @@
 package com.example.ochronasuchu;
 
 import android.text.InputFilter;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-
-
+//Filtr do formularzy, dopuszcza dwie cyfry przed przecinikiem i jedną po
 public class DecibelInputFilter implements InputFilter {
-    final int maxDigitsBeforeDecimalPoint=2;
-    final int maxDigitsAfterDecimalPoint=1;
+    private final int maxDigitsBeforeDecimalPoint=2;
+    private final int maxDigitsAfterDecimalPoint=1;
 
     @Override
     public CharSequence filter(CharSequence source, int start, int end,
@@ -23,9 +21,7 @@ public class DecibelInputFilter implements InputFilter {
                 return dest.subSequence(dstart, dend);
             return "";
         }
-
         return null;
-
     }
 }
 

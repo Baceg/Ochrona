@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class InfoFragment extends Fragment {
+//Fragment info
+public class FragmentInfo extends Fragment {
 
     Button buttonUpdate;
     TextView infoText;
@@ -19,15 +21,17 @@ public class InfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_info,container,false);
         myDB = new DatabaseHelper(this.getActivity());
         buttonUpdate = (Button) view.findViewById(R.id.updateButton);
         infoText = view.findViewById(R.id.textViewInfo);
+
         infoText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                //((MainActivity)getActivity()).clearDatabase();
+                //miejsce na możliwe funkcje dla administratora
+                ((MainActivity)getActivity()).clearDatabase();
+                Toast.makeText(getContext(),"easter egg",Toast.LENGTH_SHORT).show();
                 return false;
             }
         }

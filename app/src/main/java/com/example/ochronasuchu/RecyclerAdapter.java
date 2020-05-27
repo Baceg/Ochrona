@@ -12,29 +12,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
 import java.util.ArrayList;
-
+//Obsługuje widget Recyclerview
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
-    private ArrayList<ItemDto> mRecList;
+    private ArrayList<ItemHearingProtector> mRecList;
     private Context mContext;
     private Dialog mDialog;
 
-
-
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
         private CardView mCardView;
-        public ImageView mImageView;
-        public TextView mTextView4;
-        public TextView mTextView5;
-        public TextView mTextView6;
+        private ImageView mImageView;
+        private TextView mTextView4;
+        private TextView mTextView5;
+        private TextView mTextView6;
 
-
-        public RecyclerViewHolder(@NonNull View itemView) {
+        private RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mCardView = itemView.findViewById(R.id.card_view);
             mImageView = itemView.findViewById(R.id.imageView);
@@ -45,9 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         }
     }
 
-
-    public RecyclerAdapter(Context myContext,ArrayList<ItemDto> recList){
-
+    public RecyclerAdapter(Context myContext,ArrayList<ItemHearingProtector> recList){
         mContext = myContext;
         mRecList = recList;
     }
@@ -56,29 +49,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View V = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item,parent,false);
         final RecyclerViewHolder rvh = new RecyclerViewHolder(V);
-
-        //Dialog ini
         mDialog = new Dialog(mContext);
-        mDialog.setContentView(R.layout.item_dialog);
-
+        mDialog.setContentView(R.layout.dialog_item);
         rvh.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        //        Toast.makeText(mContext,"TEST CLICK "+String.valueOf(rvh.getAdapterPosition()),Toast.LENGTH_SHORT).show();
-                ItemDto clickedItem = mRecList.get(rvh.getAdapterPosition());
-
-
+                ItemHearingProtector clickedItem = mRecList.get(rvh.getAdapterPosition());
                 writeDialog(clickedItem);
                 mDialog.show();
             }
         });
-
-
         return rvh;
     }
 
-    private void writeDialog(final ItemDto clickedItem){
-        //no musi być po prostu tutaj deklaracja
+    private void writeDialog(final ItemHearingProtector clickedItem){
         TextView dialog_text_1 = mDialog.findViewById(R.id.textView7);
         TextView dialog_text_2 = mDialog.findViewById(R.id.textView8);
         ImageView dialog_image_1 = mDialog.findViewById(R.id.imageView2);
@@ -88,8 +72,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         TextView dialog_text_5 = mDialog.findViewById(R.id.textView11);
         TextView dialog_text_6 = mDialog.findViewById(R.id.textView12);
         Button dialog_button_delete = mDialog.findViewById(R.id.delete_button);
-
-
         //set obrazek i nazwa
         if (clickedItem.getTyp().equals("N")) {
             dialog_image_1.setImageResource(R.drawable.ic_headset_white_24dp);
@@ -98,8 +80,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         }
         dialog_text_1.setText(clickedItem.getProd());
         dialog_text_2.setText(clickedItem.getModel());
-
-
         //graph
         dialog_graph.removeAllSeries();
         dialog_graph.setTitle("Charakterystyka Tłumienia");
@@ -129,17 +109,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         dialog_graph.addSeries(series2);
         dialog_graph.getLegendRenderer().setVisible(true);
 
-        dialog_text_3.setText("H: "+clickedItem.getH());
+        dialog_text_3.setText("L: "+clickedItem.getL());
         dialog_text_4.setText("M: "+clickedItem.getM());
-        dialog_text_5.setText("L: "+clickedItem.getL());
+        dialog_text_5.setText("H: "+clickedItem.getH());
         dialog_text_6.setText("SNR: "+clickedItem.getSNR());
-
+        //Możliwość usunięcia z bd ochronnika użytkownika
         if (clickedItem.getCerty().equals("user")){
             dialog_button_delete.setVisibility(View.VISIBLE);
         } else {
             dialog_button_delete.setVisibility(View.GONE);
         }
-
+        //Usuń kliknięty
         dialog_button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,15 +154,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         });
     }
 
-
-
-
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        ItemDto currentItem = mRecList.get(position);
+        ItemHearingProtector currentItem = mRecList.get(position);
         holder.mTextView4.setText(currentItem.getProd());
         holder.mTextView5.setText(currentItem.getModel());
-        holder.mTextView6.setText("H: "+currentItem.getH()+" M: "+currentItem.getM()+" L: "+currentItem.getL());
+        holder.mTextView6.setText("L: "+currentItem.getL()+" M: "+currentItem.getM()+" H: "+currentItem.getH());
         if (currentItem.getTyp().equals("N")){
             if (currentItem.getCerty().equals("user"))
                 holder.mImageView.setImageResource(R.drawable.ic_headset_gold_24dp);
@@ -196,7 +173,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
 
     }
-
     @Override
     public int getItemCount() {
         return mRecList.size();
