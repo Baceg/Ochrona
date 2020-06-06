@@ -115,9 +115,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         dialog_text_6.setText("SNR: "+clickedItem.getSNR());
         //Możliwość usunięcia z bd ochronnika użytkownika
         if (clickedItem.getCerty().equals("user")){
-            dialog_button_delete.setVisibility(View.VISIBLE);
+            dialog_button_delete.setText("Usuń");
         } else {
-            dialog_button_delete.setVisibility(View.GONE);
+            dialog_button_delete.setText("Ukryj");
         }
         //Usuń kliknięty
         dialog_button_delete.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +145,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                 list.add(clickedItem.getM());
                 list.add(clickedItem.getL());
                 list.add(clickedItem.getSNR());
+                list.add(clickedItem.getCerty());
                 ((MainActivity)mContext).deleteFromDatabase(list);
                 ((MainActivity)mContext).writeRecordsUser();
                 ((MainActivity)mContext).writeRecords();

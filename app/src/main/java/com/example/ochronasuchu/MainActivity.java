@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart",true);
         if(firstStart){
-            onInstalSetup();
+            installDefaultDB();
         }
         writeRecords();
         writeRecordsUser();
@@ -379,8 +379,8 @@ public class MainActivity extends AppCompatActivity {
     public void deleteFromDatabase(ArrayList<String> list){
         DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
         if (list != null) {
-            myDB.deleteRecord(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5),list.get(6),list.get(7), list.get(8),list.get(9),list.get(10),
-                    list.get(11),list.get(12),list.get(13),list.get(14),list.get(15),list.get(16),list.get(17),list.get(18),list.get(19),list.get(20));
+            myDB.deleteRecord(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5), list.get(6), list.get(7), list.get(8), list.get(9), list.get(10),
+                    list.get(11), list.get(12), list.get(13), list.get(14), list.get(15), list.get(16), list.get(17), list.get(18), list.get(19), list.get(20), list.get(21));
         }
         myDB.close();
     }
@@ -407,11 +407,10 @@ public class MainActivity extends AppCompatActivity {
     }
     //metoda uruchomi się tylko raz po instalacji aplikacji
     //Podczas testów nieelegacko będzie tu podana baza danych, później możliwa zamiana na pobranie jej z internetu
-    private void onInstalSetup(){
+    public void installDefaultDB(){
 
         DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
         myDB.deleteWebData();
-        //niedobre rozwiązanie
         myDB.insertData("W", "TON INSTITUTE ", "TP_01", "27.7", "28.5", "31.1", "29.1", "32.9", "40.8", "43.5", "6.3", "5.5", "7.4", "4.9", "3.1", "7.1", "4", "21.4", "23", "23.7", "24.2", "29.8", "33.7", "39.5", "30", "26", "24", "29", "UE/117/2019/1437");
         myDB.insertData("W", "TON INSTITUTE ", "TP_02", "10.1", "13.8", "17.5", "22.4", "27.1", "33", "31.8", "3.3", "4.2", "3", "3.8", "3.1", "6.4", "4.6", "6.8", "9.6", "14.5", "18.6", "24", "26.6", "27.2", "24", "17", "12", "20", "UE/118/2019/1437");
         myDB.insertData("W", "TON INSTITUTE ", "TP_03", "13.2", "17.1", "20.3", "24.3", "27.2", "30.2", "39.5", "6.5", "4.8", "4.9", "4.9", "3.8", "7.3", "6.7", "6.7", "12.3", "15.4", "19.4", "23.4", "22.9", "32.8", "23", "18", "13", "21", "UE/119/2019/1437");

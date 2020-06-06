@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class FragmentInfo extends Fragment {
 
     Button buttonUpdate;
+    Button buttonReset;
     TextView infoText;
     DatabaseHelper myDB;
 
@@ -24,6 +25,7 @@ public class FragmentInfo extends Fragment {
         View view = inflater.inflate(R.layout.fragment_info,container,false);
         myDB = new DatabaseHelper(this.getActivity());
         buttonUpdate = (Button) view.findViewById(R.id.updateButton);
+        buttonReset = (Button) view.findViewById(R.id.resetButton);
         infoText = view.findViewById(R.id.textViewInfo);
 
         infoText.setOnLongClickListener(new View.OnLongClickListener() {
@@ -31,18 +33,33 @@ public class FragmentInfo extends Fragment {
             public boolean onLongClick(View v) {
                 //miejsce na możliwe funkcje dla administratora
                 ((MainActivity)getActivity()).clearDatabase();
+                ((MainActivity)getActivity()).writeRecords();
+                ((MainActivity)getActivity()).refreshRecycler();
                 Toast.makeText(getContext(),"easter egg",Toast.LENGTH_SHORT).show();
-                return false;
+                return true;
             }
         }
         );
 
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+        buttonReset.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
+                ((MainActivity)getActivity()).installDefaultDB();
+                ((MainActivity)getActivity()).writeRecords();
+                ((MainActivity)getActivity()).refreshRecycler();
+
+                return true;
+            }
+        });
+
+
+        buttonUpdate.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
                 ((MainActivity)getActivity()).updateData();
                 ((MainActivity)getActivity()).writeRecords();
                 ((MainActivity)getActivity()).refreshRecycler();
+                return true;
             }
         });
     return view;

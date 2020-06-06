@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="#232323">
 
 
     <TextView
         android:id="@+id/textView1"
+        android:textColor="@android:color/white"
         android:layout_marginTop="220dp"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
@@ -23,16 +24,24 @@
         android:text="Aktualizacja" />
     <TextView
         android:id="@+id/textView2"
+        android:textColor="@android:color/white"
         android:layout_margin="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_above="@+id/resetButton"
         android:gravity="center"
         android:text="Aplikacja powstała z myślą o inspektorach BHP i pracownikach narażonych na hałas. Umożliwia łatwy dostęp do informacji, charakterystyk wybranych ochronników słuchu dostępnych na polskim rynku."
         />
-
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Odzyskaj Domyślną Bazę Danych" />
     <TextView
         android:id="@+id/textViewInfo"
+        android:textColor="@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
