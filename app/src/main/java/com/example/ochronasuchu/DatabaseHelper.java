@@ -41,15 +41,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_29 = "SNR";
     private static final String COL_30 = "Certyfikat";
 
-    public DatabaseHelper(Context context) {
+    DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
 
     }
 
-    public Cursor getAllData() {
+    Cursor getAllData() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
-        return res;
+        return db.rawQuery("select * from " + TABLE_NAME, null);
     }
 
     private static final String SQL_CREATE_ENTRIES = "create table " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT,typ TEXT,prod TEXT,model TEXT,Mf125 TEXT,Mf250 TEXT,Mf500 TEXT,Mf1000 TEXT,Mf2000 TEXT,Mf4000 TEXT,Mf8000 TEXT," +
@@ -67,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     //Dodaj jeden rekord
-    public boolean insertData(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
+    boolean insertData(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                               String sf125, String sf250, String sf500, String sf1000, String sf2000, String sf4000, String sf8000,
                               String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
                               String H, String M, String L, String SNR,String Certyfikat) {
@@ -103,18 +102,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_29, SNR);
         contentValues.put(COL_30, Certyfikat);
         long result = db.insert(TABLE_NAME,null, contentValues);
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
     //Usuń wszystkie rekordy poza tymi użytkownika
-    public Integer deleteWebData() {
+    Integer deleteWebData() {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "Certyfikat != ?", new String[] {"user"});
     }
     //Usuń konkretny rekord
-    public Integer deleteRecord(String typ, String prod, String model,
+    Integer deleteRecord(String typ, String prod, String model,
                                 String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                                 String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
                                 String H, String M, String L, String SNR, String Certy) {

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#2196F3</color>
+    <color name="colorPrimary">#E44196FD</color>
+    <color name="colorPrimaryDark">#F02967AF</color>
+    <color name="infoBackground">#995A6DA6</color>
     <color name="colorAccent">#FF9800</color>
+    <color name="userBackground">#DCF3CE9F</color>
+    <color name="baseBackground">#727272</color>
+    <color name="ic_launcher_foreground">#9E9AA6</color>
+    <color name="dark_dialog">#232323</color>
+    <color name="ic_launcher_background">#995A6DA6</color>
+
 </resources>

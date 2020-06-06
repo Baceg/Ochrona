@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         writeRecords();
         writeRecordsUser();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(naviListener);
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         }
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
+        assert fragment != null;
         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
                 .commit();
     }
@@ -145,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
 
+                    assert selectedFragment != null;
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
                     return true;
                 }
@@ -189,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = myDB.getAllData();
         try {
             while (cursor.moveToNext()) {
-                if (cursor.getString(29).toString().equals("user")) {
+                if (cursor.getString(29).equals("user")) {
                     listProtectionUser.add(new ItemHearingProtector(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
                             cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11),
                             cursor.getString(12), cursor.getString(13), cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17),

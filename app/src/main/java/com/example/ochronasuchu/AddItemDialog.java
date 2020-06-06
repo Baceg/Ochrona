@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import java.util.ArrayList;
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 //AddItemDialog obsługuje formularz z dodawnaiem ochronnika do bazy
@@ -20,27 +24,29 @@ public class AddItemDialog extends AppCompatDialogFragment {
     private EditText editTextMf2000;
     private EditText editTextMf4000;
     private EditText editTextMf8000;
-    private EditText editTextAvp125;
-    private EditText editTextAvp250;
-    private EditText editTextAvp500;
-    private EditText editTextAvp1000;
-    private EditText editTextAvp2000;
-    private EditText editTextAvp4000;
-    private EditText editTextAvp8000;
+    private EditText editTextApv125;
+    private EditText editTextApv250;
+    private EditText editTextApv500;
+    private EditText editTextApv1000;
+    private EditText editTextApv2000;
+    private EditText editTextApv4000;
+    private EditText editTextApv8000;
     private EditText editTextL;
     private EditText editTextM;
     private EditText editTextH;
     private EditText editTextSNR;
     private EditText editTextProd;
     private EditText editTextModel;
-    public ArrayList<String> data = new ArrayList<String>();
+    private ArrayList<String> data = new ArrayList<>();
 
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialog = inflater.inflate(R.layout.dialog_add,null);
+        final ViewGroup nullParent = null; //by uniknąć warninga
+        View dialog = inflater.inflate(R.layout.dialog_add,nullParent);
 
         builder.setView(dialog)
                 .setTitle("Dodaj")
@@ -62,13 +68,13 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         if (editTextMf2000.getText().toString().equals("")) editTextMf2000.setText("0");
                         if (editTextMf4000.getText().toString().equals("")) editTextMf4000.setText("0");
                         if (editTextMf8000.getText().toString().equals("")) editTextMf8000.setText("0");
-                        if (editTextAvp125.getText().toString().equals("")) editTextAvp125.setText("0");
-                        if (editTextAvp250.getText().toString().equals("")) editTextAvp250.setText("0");
-                        if (editTextAvp500.getText().toString().equals("")) editTextAvp500.setText("0");
-                        if (editTextAvp1000.getText().toString().equals("")) editTextAvp1000.setText("0");
-                        if (editTextAvp2000.getText().toString().equals("")) editTextAvp2000.setText("0");
-                        if (editTextAvp4000.getText().toString().equals("")) editTextAvp4000.setText("0");
-                        if (editTextAvp8000.getText().toString().equals("")) editTextAvp8000.setText("0");
+                        if (editTextApv125.getText().toString().equals("")) editTextApv125.setText("0");
+                        if (editTextApv250.getText().toString().equals("")) editTextApv250.setText("0");
+                        if (editTextApv500.getText().toString().equals("")) editTextApv500.setText("0");
+                        if (editTextApv1000.getText().toString().equals("")) editTextApv1000.setText("0");
+                        if (editTextApv2000.getText().toString().equals("")) editTextApv2000.setText("0");
+                        if (editTextApv4000.getText().toString().equals("")) editTextApv4000.setText("0");
+                        if (editTextApv8000.getText().toString().equals("")) editTextApv8000.setText("0");
                         if (editTextH.getText().toString().equals("")) editTextH.setText("0");
                         if (editTextM.getText().toString().equals("")) editTextM.setText("0");
                         if (editTextL.getText().toString().equals("")) editTextL.setText("0");
@@ -83,26 +89,26 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         data.add(editTextMf2000.getText().toString());
                         data.add(editTextMf4000.getText().toString());
                         data.add(editTextMf8000.getText().toString());
-                        data.add(String.valueOf(Float.valueOf(editTextMf125.getText().toString())-Float.valueOf(editTextAvp125.getText().toString())));
-                        data.add(String.valueOf(Float.valueOf(editTextMf250.getText().toString())-Float.valueOf(editTextAvp250.getText().toString())));
-                        data.add(String.valueOf(Float.valueOf(editTextMf500.getText().toString())-Float.valueOf(editTextAvp500.getText().toString())));
-                        data.add(String.valueOf(Float.valueOf(editTextMf1000.getText().toString())-Float.valueOf(editTextAvp1000.getText().toString())));
-                        data.add(String.valueOf(Float.valueOf(editTextMf2000.getText().toString())-Float.valueOf(editTextAvp2000.getText().toString())));
-                        data.add(String.valueOf(Float.valueOf(editTextMf4000.getText().toString())-Float.valueOf(editTextAvp4000.getText().toString())));
-                        data.add(String.valueOf(Float.valueOf(editTextMf8000.getText().toString())-Float.valueOf(editTextAvp8000.getText().toString())));
-                        data.add(editTextAvp125.getText().toString());
-                        data.add(editTextAvp250.getText().toString());
-                        data.add(editTextAvp500.getText().toString());
-                        data.add(editTextAvp1000.getText().toString());
-                        data.add(editTextAvp2000.getText().toString());
-                        data.add(editTextAvp4000.getText().toString());
-                        data.add(editTextAvp8000.getText().toString());
+                        data.add(String.valueOf(Float.valueOf(editTextMf125.getText().toString())-Float.valueOf(editTextApv125.getText().toString())));
+                        data.add(String.valueOf(Float.valueOf(editTextMf250.getText().toString())-Float.valueOf(editTextApv250.getText().toString())));
+                        data.add(String.valueOf(Float.valueOf(editTextMf500.getText().toString())-Float.valueOf(editTextApv500.getText().toString())));
+                        data.add(String.valueOf(Float.valueOf(editTextMf1000.getText().toString())-Float.valueOf(editTextApv1000.getText().toString())));
+                        data.add(String.valueOf(Float.valueOf(editTextMf2000.getText().toString())-Float.valueOf(editTextApv2000.getText().toString())));
+                        data.add(String.valueOf(Float.valueOf(editTextMf4000.getText().toString())-Float.valueOf(editTextApv4000.getText().toString())));
+                        data.add(String.valueOf(Float.valueOf(editTextMf8000.getText().toString())-Float.valueOf(editTextApv8000.getText().toString())));
+                        data.add(editTextApv125.getText().toString());
+                        data.add(editTextApv250.getText().toString());
+                        data.add(editTextApv500.getText().toString());
+                        data.add(editTextApv1000.getText().toString());
+                        data.add(editTextApv2000.getText().toString());
+                        data.add(editTextApv4000.getText().toString());
+                        data.add(editTextApv8000.getText().toString());
                         data.add(editTextH.getText().toString());
                         data.add(editTextM.getText().toString());
                         data.add(editTextL.getText().toString());
                         data.add(editTextSNR.getText().toString());
                         //wpisanie do bazy danych
-                        ((MainActivity)getActivity()).addToDatabase(data);
+                        ((MainActivity) getActivity()).addToDatabase(data);
                         //odczytanie z bazy danych
                         ((MainActivity) getActivity()).writeRecords();
                         ((MainActivity) getActivity()).writeRecordsUser();
@@ -127,20 +133,20 @@ public class AddItemDialog extends AppCompatDialogFragment {
         editTextMf4000.setFilters(new InputFilter[] {new DecibelInputFilter()});
         editTextMf8000 = dialog.findViewById(R.id.edit_mf8000);
         editTextMf8000.setFilters(new InputFilter[] {new DecibelInputFilter()});
-        editTextAvp125 = dialog.findViewById(R.id.edit_avp125);
-        editTextAvp125.setFilters(new InputFilter[] {new DecibelInputFilter()});
-        editTextAvp250 = dialog.findViewById(R.id.edit_avp250);
-        editTextAvp250.setFilters(new InputFilter[] {new DecibelInputFilter()});
-        editTextAvp500 = dialog.findViewById(R.id.edit_avp500);
-        editTextAvp500.setFilters(new InputFilter[] {new DecibelInputFilter()});
-        editTextAvp1000 = dialog.findViewById(R.id.edit_avp1000);
-        editTextAvp1000.setFilters(new InputFilter[] {new DecibelInputFilter()});
-        editTextAvp2000 = dialog.findViewById(R.id.edit_avp2000);
-        editTextAvp2000.setFilters(new InputFilter[] {new DecibelInputFilter()});
-        editTextAvp4000 = dialog.findViewById(R.id.edit_avp4000);
-        editTextAvp4000.setFilters(new InputFilter[] {new DecibelInputFilter()});
-        editTextAvp8000 = dialog.findViewById(R.id.edit_avp8000);
-        editTextAvp8000.setFilters(new InputFilter[] {new DecibelInputFilter()});
+        editTextApv125 = dialog.findViewById(R.id.edit_apv125);
+        editTextApv125.setFilters(new InputFilter[] {new DecibelInputFilter()});
+        editTextApv250 = dialog.findViewById(R.id.edit_apv250);
+        editTextApv250.setFilters(new InputFilter[] {new DecibelInputFilter()});
+        editTextApv500 = dialog.findViewById(R.id.edit_apv500);
+        editTextApv500.setFilters(new InputFilter[] {new DecibelInputFilter()});
+        editTextApv1000 = dialog.findViewById(R.id.edit_apv1000);
+        editTextApv1000.setFilters(new InputFilter[] {new DecibelInputFilter()});
+        editTextApv2000 = dialog.findViewById(R.id.edit_apv2000);
+        editTextApv2000.setFilters(new InputFilter[] {new DecibelInputFilter()});
+        editTextApv4000 = dialog.findViewById(R.id.edit_apv4000);
+        editTextApv4000.setFilters(new InputFilter[] {new DecibelInputFilter()});
+        editTextApv8000 = dialog.findViewById(R.id.edit_apv8000);
+        editTextApv8000.setFilters(new InputFilter[] {new DecibelInputFilter()});
         editTextH = dialog.findViewById(R.id.edit_H);
         editTextM = dialog.findViewById(R.id.edit_M);
         editTextL = dialog.findViewById(R.id.edit_L);

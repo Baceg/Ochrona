@@ -4,15 +4,16 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:id="@+id/dialog"
-    android:background="#232323">
+    android:background="@color/dark_dialog">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/dialog_item_image"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:src="@drawable/ic_headset_white_24dp"
         android:layout_centerHorizontal="true"
-        android:padding="2dp" />
+        android:padding="2dp"
+        android:contentDescription="@null" />
 
 
     <LinearLayout
@@ -27,103 +28,490 @@
             android:gravity="center_horizontal">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/dialog_item_producer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:text="line 1"
+                android:text="@string/producer"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/dialog_item_model"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/textView7"
+                android:layout_toEndOf="@id/dialog_item_producer"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="70dp"
                 android:layout_marginBottom="10dp"
-                android:text="Line 2"
+                android:text="@string/model"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/graph_layout"
+            android:visibility="visible"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:text="dB"
+                android:text="@string/dB"
                 android:textColor="#000000"/>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_marginTop="200dp"
                 android:layout_centerHorizontal="true"
-                android:text="Częstotliwość Hz"
+                android:text="@string/frequency"
                 android:textColor="#000000"/>
             <com.jjoe64.graphview.GraphView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:id="@+id/graph" />
+                android:id="@+id/graph"
+                android:clickable="true"
+                android:focusable="true"/>
 
         </RelativeLayout>
+        <TableLayout
+            android:id="@+id/table_layout"
+            android:layout_width="300dp"
+            android:layout_height="220dp"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:textColor="@android:color/black"
+                android:text="@string/numerical_data_of_sound_muted"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/Hz_colon"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_width="41dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/number125"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/number250"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/number500"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/number1k"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/number2k"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/number4k"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/number8k"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/mf_colon"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_width="41dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_mf125"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_mf250"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_mf500"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_mf1000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_mf2000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_mf4000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_mf8000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/sf_colon"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_width="41dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_sf125"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_sf250"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_sf500"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_sf1000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp"/>
+                <TextView
+                    android:id="@+id/dialog_sf2000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_sf4000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_sf8000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:text="@string/apv_colon"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_width="41dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_apv125"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_apv250"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_apv500"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_apv1000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp"/>
+                <TextView
+                    android:id="@+id/dialog_apv2000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_apv4000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+                <TextView
+                    android:id="@+id/dialog_apv8000"
+                    android:textColor="@android:color/black"
+                    android:text="@string/default_number"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_width="36dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/white"
+                    android:layout_height="39dp" />
+            </TableRow>
+
+            </TableLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal">
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/dialog_item_L"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
-                android:text="Line 3"
+                android:text="@string/L"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/dialog_item_M"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Line 4"
+                android:text="@string/M"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/dialog_item_H"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Line 5"
+                android:text="@string/H"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/dialog_item_SNR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Line 6"
+                android:text="@string/SNR"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
         </LinearLayout>
     <Button
-        android:id="@+id/delete_button"
+        android:id="@+id/dialog_item_delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Usuń"/>
+        android:text="@string/delete"/>
 
     </LinearLayout>
 </RelativeLayout>

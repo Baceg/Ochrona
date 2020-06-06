@@ -14,19 +14,13 @@ import android.widget.Toast;
 //Fragment info
 public class FragmentInfo extends Fragment {
 
-    Button buttonUpdate;
-    Button buttonReset;
-    TextView infoText;
-    DatabaseHelper myDB;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info,container,false);
-        myDB = new DatabaseHelper(this.getActivity());
-        buttonUpdate = (Button) view.findViewById(R.id.updateButton);
-        buttonReset = (Button) view.findViewById(R.id.resetButton);
-        infoText = view.findViewById(R.id.textViewInfo);
+        Button buttonUpdate = (Button) view.findViewById(R.id.updateButton);
+        Button buttonReset = (Button) view.findViewById(R.id.resetButton);
+        TextView infoText = view.findViewById(R.id.textViewInfo);
 
         infoText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

@@ -2,93 +2,93 @@ package com.example.ochronasuchu;
 
 import java.io.Serializable;
 //ItemHearingProtector przechowuje informacje już po odczytaniu z bazy danych
-public class ItemHearingProtector implements Serializable {
+class ItemHearingProtector implements Serializable {
 
-    public String getMf125() {
+    String getMf125() {
         return Mf125;
     }
-    public String getMf250() {
+    String getMf250() {
         return Mf250;
     }
-    public String getMf500() {
+    String getMf500() {
         return Mf500;
     }
-    public String getMf1000() {
+    String getMf1000() {
         return Mf1000;
     }
-    public String getMf2000() {
+    String getMf2000() {
         return Mf2000;
     }
-    public String getMf4000() {
+    String getMf4000() {
         return Mf4000;
     }
-    public String getMf8000() {
+    String getMf8000() {
         return Mf8000;
     }
-    public String getSf125() {
+    String getSf125() {
         return sf125;
     }
-    public String getSf250() {
+    String getSf250() {
         return sf250;
     }
-    public String getSf500() {
+    String getSf500() {
         return sf500;
     }
-    public String getSf1000() {
+    String getSf1000() {
         return sf1000;
     }
-    public String getSf2000() {
+    String getSf2000() {
         return sf2000;
     }
-    public String getSf4000() {
+    String getSf4000() {
         return sf4000;
     }
-    public String getSf8000() {
+    String getSf8000() {
         return sf8000;
     }
-    public String getAPV125() {
+    String getAPV125() {
         return APV125;
     }
-    public String getAPV250() {
+    String getAPV250() {
         return APV250;
     }
-    public String getAPV500() {
+    String getAPV500() {
         return APV500;
     }
-    public String getAPV1000() {
+    String getAPV1000() {
         return APV1000;
     }
-    public String getAPV2000() {
+    String getAPV2000() {
         return APV2000;
     }
-    public String getAPV4000() {
+    String getAPV4000() {
         return APV4000;
     }
-    public String getAPV8000() {
+    String getAPV8000() {
         return APV8000;
     }
-    public String getH() {
+    String getH() {
         return H;
     }
-    public String getM() {
+    String getM() {
         return M;
     }
-    public String getL() {
+    String getL() {
         return L;
     }
-    public String getSNR() {
+    String getSNR() {
         return SNR;
     }
-    public String getTyp() {
+    String getTyp() {
         return typ;
     }
-    public String getProd() {
+    String getProd() {
         return prod;
     }
-    public String getModel() {
+    String getModel() {
         return model;
     }
-    public String getCerty() {
+    String getCerty() {
         return certy;
     }
 
@@ -122,7 +122,7 @@ public class ItemHearingProtector implements Serializable {
     private String SNR;
     private String certy;
 
-    public ItemHearingProtector(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
+    ItemHearingProtector(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                                 String sf125, String sf250, String sf500, String sf1000, String sf2000, String sf4000, String sf8000,
                                 String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
                                 String H, String M, String L, String SNR, String certy) {
