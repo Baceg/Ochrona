@@ -58,13 +58,9 @@ public class MainActivity extends AppCompatActivity {
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Przejście do bazy od razu (mało eleganckie ale działa)
-        FragmentBase bz_fragment = new FragmentBase();
-        setListener(bz_fragment);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,bz_fragment).commit();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("bundle_key", listProtection);
-        bz_fragment.setArguments(bundle);
+        //Przejście do ekranu powitalnego (mało eleganckie ale działa)
+        FragmentWelcome wlc_fragment = new FragmentWelcome();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,wlc_fragment).commit();
     }
 
     @Override
