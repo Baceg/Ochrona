@@ -66,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     //Dodaj jeden rekord
-    boolean insertData(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
+    void insertData(String typ, String prod, String model, String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                               String sf125, String sf250, String sf500, String sf1000, String sf2000, String sf4000, String sf8000,
                               String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
                               String H, String M, String L, String SNR,String Certyfikat) {
@@ -101,8 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_28, L);
         contentValues.put(COL_29, SNR);
         contentValues.put(COL_30, Certyfikat);
-        long result = db.insert(TABLE_NAME,null, contentValues);
-        return result != -1;
+        db.insert(TABLE_NAME,null, contentValues);
     }
     //Usuń wszystkie rekordy poza tymi użytkownika
     Integer deleteWebData() {
@@ -110,12 +109,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.delete(TABLE_NAME, "Certyfikat != ?", new String[] {"user"});
     }
     //Usuń konkretny rekord
-    Integer deleteRecord(String typ, String prod, String model,
+    void deleteRecord(String typ, String prod, String model,
                                 String Mf125, String Mf250, String Mf500, String Mf1000, String Mf2000, String Mf4000, String Mf8000,
                                 String APV125, String APV250, String APV500, String APV1000, String APV2000, String APV4000, String APV8000,
                                 String H, String M, String L, String SNR, String Certy) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "typ = ? and prod = ? and model = ? and Mf125 = ? and Mf250 = ? and Mf500 = ? and Mf1000 = ? and Mf2000 = ? and Mf4000 = ? and Mf8000 = ? " +
+        db.delete(TABLE_NAME, "typ = ? and prod = ? and model = ? and Mf125 = ? and Mf250 = ? and Mf500 = ? and Mf1000 = ? and Mf2000 = ? and Mf4000 = ? and Mf8000 = ? " +
                 "and APV125 = ? and APV250 = ? and APV500 = ? and APV1000 = ? and APV2000 = ? and APV4000 = ? and APV8000 = ? and H = ? and M = ? and L = ? and SNR = ? and Certyfikat = ?"
                 , new String[] {typ, prod, model, Mf125, Mf250, Mf500, Mf1000, Mf2000, Mf4000, Mf8000, APV125, APV250, APV500, APV1000, APV2000, APV4000, APV8000, H, M, L, SNR, Certy});
     }

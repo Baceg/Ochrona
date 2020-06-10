@@ -1,5 +1,7 @@
 package com.example.ochronasuchu;
 
+import android.os.Parcelable;
+
 import java.io.Serializable;
 //ItemHearingProtector przechowuje informacje już po odczytaniu z bazy danych
 class ItemHearingProtector implements Serializable {

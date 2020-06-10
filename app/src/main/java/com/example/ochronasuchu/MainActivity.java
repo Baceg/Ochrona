@@ -3,10 +3,12 @@ package com.example.ochronasuchu;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -21,8 +23,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.net.InetAddress;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     Boolean dataInserted = false;
     Integer deletedRows = 0;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         //odczytanie z bd
 
 
-        SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
-        boolean firstStart = prefs.getBoolean("firstStart",true);
-        if(firstStart){
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
+        if (firstStart) {
             installDefaultDB();
         }
         writeRecords();
@@ -60,19 +62,19 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //Przejście do ekranu powitalnego (mało eleganckie ale działa)
         FragmentWelcome wlc_fragment = new FragmentWelcome();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,wlc_fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, wlc_fragment).commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menus,menu);
+        inflater.inflate(R.menu.toolbar_menus, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.add:
                 showDialogAdd();
                 addType = "N";
@@ -102,20 +104,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    //funkcja zamieniająca fragment na razie nie wykorzystana
-    public void replaceFragments(Class fragmentClass) {
-        Fragment fragment = null;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        assert fragment != null;
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
-                .commit();
-    }
+
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener naviListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -143,16 +134,17 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     assert selectedFragment != null;
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                     return true;
                 }
             };
-// metoda odczytuje z bazy danych i wpisuje do arraylist
+
+    // metoda odczytuje z bazy danych i wpisuje do arraylist
     public void writeRecords() {
         DatabaseHelper myDB = new DatabaseHelper(this);
-        if (listProtection != null){
+        if (listProtection != null) {
             listProtection.clear();
-        } else{
+        } else {
             listProtection = new ArrayList<>();
         }
 
@@ -176,11 +168,12 @@ public class MainActivity extends AppCompatActivity {
         bundle.putSerializable("bundle_key", listProtection);
         fragment.setArguments(bundle);
     }
+
     public void writeRecordsUser() {
         DatabaseHelper myDB = new DatabaseHelper(this);
-        if (listProtectionUser != null){
+        if (listProtectionUser != null) {
             listProtectionUser.clear();
-        } else{
+        } else {
             listProtectionUser = new ArrayList<>();
         }
 
@@ -207,13 +200,14 @@ public class MainActivity extends AppCompatActivity {
         fragment.setArguments(bundle);
     }
 
-    public void showDialogAdd(){
+    public void showDialogAdd() {
         AddItemDialog addItemDialog = new AddItemDialog();
-        addItemDialog.show(getSupportFragmentManager(),"add dialog");
+        addItemDialog.show(getSupportFragmentManager(), "add dialog");
 
     }
-//metody do sortowania
-    public void sortRecordsByProd(){
+
+    //metody do sortowania
+    public void sortRecordsByProd() {
         Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
             @Override
             public int compare(ItemHearingProtector o1, ItemHearingProtector o2) {
@@ -221,7 +215,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void sortUserRecordsByProd(){
+
+    public void sortUserRecordsByProd() {
         Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
             @Override
             public int compare(ItemHearingProtector o1, ItemHearingProtector o2) {
@@ -229,83 +224,75 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void sortRecordsByH(){
+
+    public void sortRecordsByH() {
         Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
             @Override
             public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
-                return Integer.parseInt(o1.getH())-Integer.parseInt(o2.getH());
-            }
-        });
-    }
-    public void sortUserRecordsByH(){
-        Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
-            @Override
-            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
-                return Integer.parseInt(o1.getH())-Integer.parseInt(o2.getH());
-            }
-        });
-    }
-    public void sortRecordsByM(){
-        Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
-            @Override
-            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
-                return Integer.parseInt(o1.getM())-Integer.parseInt(o2.getM());
-            }
-        });
-    }
-    public void sortUserRecordsByM(){
-        Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
-            @Override
-            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
-                return Integer.parseInt(o1.getM())-Integer.parseInt(o2.getM());
-            }
-        });
-    }
-    public void sortRecordsByL(){
-        Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
-            @Override
-            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
-                return Integer.parseInt(o1.getL())-Integer.parseInt(o2.getL());
-            }
-        });
-    }
-    public void sortUserRecordsByL(){
-        Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
-            @Override
-            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
-                return Integer.parseInt(o1.getL())-Integer.parseInt(o2.getL());
+                return Integer.parseInt(o1.getH()) - Integer.parseInt(o2.getH());
             }
         });
     }
 
-    public void setListener(UpdateInterface listener){
+    public void sortUserRecordsByH() {
+        Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
+            @Override
+            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
+                return Integer.parseInt(o1.getH()) - Integer.parseInt(o2.getH());
+            }
+        });
+    }
+
+    public void sortRecordsByM() {
+        Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
+            @Override
+            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
+                return Integer.parseInt(o1.getM()) - Integer.parseInt(o2.getM());
+            }
+        });
+    }
+
+    public void sortUserRecordsByM() {
+        Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
+            @Override
+            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
+                return Integer.parseInt(o1.getM()) - Integer.parseInt(o2.getM());
+            }
+        });
+    }
+
+    public void sortRecordsByL() {
+        Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
+            @Override
+            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
+                return Integer.parseInt(o1.getL()) - Integer.parseInt(o2.getL());
+            }
+        });
+    }
+
+    public void sortUserRecordsByL() {
+        Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
+            @Override
+            public int compare(ItemHearingProtector o2, ItemHearingProtector o1) {
+                return Integer.parseInt(o1.getL()) - Integer.parseInt(o2.getL());
+            }
+        });
+    }
+
+    public void setListener(UpdateInterface listener) {
         this.listener = listener;
     }
-    public void refreshRecycler(){
+
+    public void refreshRecycler() {
         listener.updateRecycler();
     }
-//Metoda sprawdza czy można nawiązać połączenie ze stroną internetową
-    public boolean isInternetAvailable(String urlString) {
-        try {
-            InetAddress ipAddr = InetAddress.getByName(urlString);
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
-//Metoda odczytuje stronę internetową i zapisuje w liście
-    public List<String> getTextFromWeb(String urlString)
-    {
-        URLConnection feedUrl;
-        List<String> placeAddress = new ArrayList<>();
+    //Metoda odczytuje stronę internetową i zapisuje w liście
+    public List<String> getTextFromWeb(String urlString) {
+        //URLConnection feedUrl;
+        List<String> placeAddress;
         final StringBuilder builder = new StringBuilder();
-        try
-        {
-            if (isInternetAvailable(urlString)==false){
-                //    return null;
-            }
-            //else {
+        try {
+
             Document doc = Jsoup.connect(urlString).get();
             Element body = doc.body();
             builder.append(body.text());
@@ -313,57 +300,56 @@ public class MainActivity extends AppCompatActivity {
             placeAddress = Arrays.asList(separate_records);
             return placeAddress; // return whatever you need
             //}
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return null;
     }
-//Metoda pobiera dane ze strony internetowej i wpisuje do bazy danych
-    public void updateData(){
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                final List<String> addressList = getTextFromWeb("http://192.168.0.227/ochslu/");
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
 
-                                        DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
-                                        //dataInserted = false;
-                                        if (addressList != null) {
-                                            deletedRows = myDB.deleteWebData();
-                                            for (int i = 0; i < addressList.size() / 29; i++)
-                                                myDB.insertData(addressList.get(i * 29), addressList.get(i * 29 + 1), addressList.get(i * 29 + 2), addressList.get(i * 29 + 3), addressList.get(i * 29 + 4), addressList.get(i * 29 + 5),
-                                                        addressList.get(i * 29 + 6), addressList.get(i * 29 + 7), addressList.get(i * 29 + 8), addressList.get(i * 29 + 9), addressList.get(i * 29 + 10), addressList.get(i * 29 + 11),
-                                                        addressList.get(i * 29 + 12), addressList.get(i * 29 + 13), addressList.get(i * 29 + 14), addressList.get(i * 29 + 15), addressList.get(i * 29 + 16), addressList.get(i * 29 + 17),
-                                                        addressList.get(i * 29 + 18), addressList.get(i * 29 + 19), addressList.get(i * 29 + 20), addressList.get(i * 29 + 21), addressList.get(i * 29 + 22), addressList.get(i * 29 + 23),
-                                                        addressList.get(i * 29 + 24), addressList.get(i * 29 + 25), addressList.get(i * 29 + 26), addressList.get(i * 29 + 27), addressList.get(i * 29 + 28));
-                                            dataInserted = true;
-                                        }
-                                        myDB.close();
-                                        if (deletedRows > 0 && dataInserted == true) {
-                                            Toast.makeText(getApplicationContext(), "Aktualizacja ukończona pomyślnie", Toast.LENGTH_SHORT).show();
-                                        } else if (deletedRows > 0 && dataInserted == false ) {
-                                            Toast.makeText(getApplicationContext(), "Usunieto i nie dano", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else if (deletedRows == 0 && dataInserted == true) {
-                                            Toast.makeText(getApplicationContext(), "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else if (deletedRows == 0 && dataInserted == false){
-                                            Toast.makeText(getApplicationContext(), "Nie usunieto i nie dano", Toast.LENGTH_SHORT).show();
-                                        }
-                                        dataInserted = false;
-                                    }
-                                });
+    //Metoda pobiera dane ze strony internetowej i wpisuje do bazy danych
+    public void updateData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-                            }
-                        }).start();
+                final List<String> addressList = getTextFromWeb("https://goraceochronnikisluchu.pl/ochronniki/");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
+                        if (addressList != null) {
+                            deletedRows = myDB.deleteWebData();
+                            for (int i = 0; i < addressList.size() / 29; i++)
+                                myDB.insertData(addressList.get(i * 29), addressList.get(i * 29 + 1), addressList.get(i * 29 + 2), addressList.get(i * 29 + 3), addressList.get(i * 29 + 4), addressList.get(i * 29 + 5),
+                                        addressList.get(i * 29 + 6), addressList.get(i * 29 + 7), addressList.get(i * 29 + 8), addressList.get(i * 29 + 9), addressList.get(i * 29 + 10), addressList.get(i * 29 + 11),
+                                        addressList.get(i * 29 + 12), addressList.get(i * 29 + 13), addressList.get(i * 29 + 14), addressList.get(i * 29 + 15), addressList.get(i * 29 + 16), addressList.get(i * 29 + 17),
+                                        addressList.get(i * 29 + 18), addressList.get(i * 29 + 19), addressList.get(i * 29 + 20), addressList.get(i * 29 + 21), addressList.get(i * 29 + 22), addressList.get(i * 29 + 23),
+                                        addressList.get(i * 29 + 24), addressList.get(i * 29 + 25), addressList.get(i * 29 + 26), addressList.get(i * 29 + 27), addressList.get(i * 29 + 28));
+                            dataInserted = true;
+                        }
+                        myDB.close();
+                        if (deletedRows > 0 && dataInserted) {
+                            Toast.makeText(getApplicationContext(), "Aktualizacja ukończona pomyślnie", Toast.LENGTH_SHORT).show();
+                        } else if (deletedRows > 0 && !dataInserted) {
+                            Toast.makeText(getApplicationContext(), "Usunieto i nie dodano", Toast.LENGTH_SHORT).show();
+                        } else if (deletedRows == 0 && dataInserted) {
+                            Toast.makeText(getApplicationContext(), "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
+                        } else if (deletedRows == 0 && !dataInserted) {
+                            Toast.makeText(getApplicationContext(), "Brak połączenia ze stroną", Toast.LENGTH_SHORT).show();
+                        }
+                        dataInserted = false;
+                    }
+                });
+                writeRecords();
+            }
+
+        }).start();
+
     }
 
-    public void addToDatabase(ArrayList<String> list){
+    public void addToDatabase(ArrayList<String> list) {
         DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
         if (list != null) {
             myDB.insertData(addType, list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5), list.get(6), list.get(7), list.get(8), list.get(9), list.get(10), list.get(11), list.get(12),
@@ -371,10 +357,11 @@ public class MainActivity extends AppCompatActivity {
                     list.get(25), list.get(26), "user");
 
         }
-        myDB.close();
-}
 
-    public void deleteFromDatabase(ArrayList<String> list){
+        myDB.close();
+    }
+
+    public void deleteFromDatabase(ArrayList<String> list) {
         DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
         if (list != null) {
             myDB.deleteRecord(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5), list.get(6), list.get(7), list.get(8), list.get(9), list.get(10),
@@ -382,30 +369,32 @@ public class MainActivity extends AppCompatActivity {
         }
         myDB.close();
     }
-    public void clearDatabase(){
+
+    public void clearDatabase() {
         DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
         myDB.deleteWebData();
         myDB.close();
     }
 
-    public void onRadioButtonClicked(View view){
+    public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.radio_nausznik:
                 addType = "N";
                 break;
             case R.id.radio_wkladka:
                 if (checked)
                     addType = "W";
-                    break;
+                break;
         }
 
 
     }
+
     //metoda uruchomi się tylko raz po instalacji aplikacji
     //Podczas testów nieelegacko będzie tu podana baza danych, później możliwa zamiana na pobranie jej z internetu
-    public void installDefaultDB(){
+    public void installDefaultDB() {
 
         DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
         myDB.deleteWebData();
@@ -413,7 +402,7 @@ public class MainActivity extends AppCompatActivity {
         myDB.insertData("W", "TON INSTITUTE ", "TP_02", "10.1", "13.8", "17.5", "22.4", "27.1", "33", "31.8", "3.3", "4.2", "3", "3.8", "3.1", "6.4", "4.6", "6.8", "9.6", "14.5", "18.6", "24", "26.6", "27.2", "24", "17", "12", "20", "UE/118/2019/1437");
         myDB.insertData("W", "TON INSTITUTE ", "TP_03", "13.2", "17.1", "20.3", "24.3", "27.2", "30.2", "39.5", "6.5", "4.8", "4.9", "4.9", "3.8", "7.3", "6.7", "6.7", "12.3", "15.4", "19.4", "23.4", "22.9", "32.8", "23", "18", "13", "21", "UE/119/2019/1437");
         myDB.insertData("W", "TON INSTITUTE ", "TP_04", "13.3", "14.6", "15.3", "19", "26.8", "27.2", "30.3", "4.6", "4.3", "3.9", "4.1", "2.7", "4.6", "5.7", "8.7", "10.3", "11.4", "14.9", "24.1", "22.6", "24.6", "22", "15", "12", "18", "UE/120/2019/1437");
-        myDB.insertData("N", "3M", "Peltor H520A", "11.4", "18.7", "27.5", "32.9", "33.6", "36.6", "35.9", "4.1", "3.6", "2.5", "2.7", "3.4", "2.7", "3.7","7.3","15.1","25","30.6","32.5","33.6","32.7", "32", "25", "15", "27","web");
+        myDB.insertData("N", "3M", "Peltor H520A", "11.4", "18.7", "27.5", "32.9", "33.6", "36.6", "35.9", "4.1", "3.6", "2.5", "2.7", "3.4", "2.7", "3.7", "7.3", "15.1", "25", "30.6", "32.5", "33.6", "32.7", "32", "25", "15", "27", "web");
         myDB.insertData("N", "3M", "Peltor H520A", "14.6", "20.2", "32.5", "39.3", "36.4", "34.4", "40.2", "1.6", "2.5", "2.3", "2.1", "2.4", "4", "2.3", "13", "17.7", "30.2", "37.1", "34", "30.4", "37.9", "34", "29", "20", "31", "web");
         myDB.insertData("N", "3M", "Peltor H540A", "17.4", "24.7", "34.7", "41.4", "39.3", "47.5", "42.6", "2.1", "2.6", "2", "2.1", "1.5", "4.5", "2.6", "15.3", "22.1", "32.7", "39.3", "37.8", "43", "40", "40", "32", "23", "35", "web");
         myDB.insertData("N", "3M", "Peltor X1A", "11.9", "15.4", "24.5", "34.3", "32.6", "37.4", "37.4", "2", "2.6", "2.6", "2.4", "3.3", "2.5", "3.8", "9.9", "12.8", "21.9", "31.9", "29.3", "34.9", "33.6", "32", "24", "16", "27", "web");
@@ -469,13 +458,11 @@ public class MainActivity extends AppCompatActivity {
         myDB.insertData("W", "3M", "3M EARsoft FX", "37.5", "38.5", "40.4", "38.6", "39.6", "48.9", "47.8", "6", "5.4", "5", "4.2", "2.5", "3.8", "3.9", "31.5", "33.1", "35.4", "34.4", "37.1", "45.1", "43.9", "39", "36", "34", "39", "web");
 
         myDB.close();
-        SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("firstStart",false);
+        editor.putBoolean("firstStart", false);
         editor.apply();
     }
-
-
 
 
 }

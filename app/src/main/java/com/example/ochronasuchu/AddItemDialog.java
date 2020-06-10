@@ -108,7 +108,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         data.add(editTextL.getText().toString());
                         data.add(editTextSNR.getText().toString());
                         //wpisanie do bazy danych
-                        ((MainActivity) getActivity()).addToDatabase(data);
+                        ((MainActivity) Objects.requireNonNull(getActivity())).addToDatabase(data);
                         //odczytanie z bazy danych
                         ((MainActivity) getActivity()).writeRecords();
                         ((MainActivity) getActivity()).writeRecordsUser();

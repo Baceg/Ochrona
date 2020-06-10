@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 //Fragment info
 public class FragmentInfo extends Fragment {
 
@@ -18,15 +20,15 @@ public class FragmentInfo extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info,container,false);
-        Button buttonUpdate = (Button) view.findViewById(R.id.updateButton);
-        Button buttonReset = (Button) view.findViewById(R.id.resetButton);
+        Button buttonUpdate = view.findViewById(R.id.updateButton);
+        Button buttonReset = view.findViewById(R.id.resetButton);
         TextView infoText = view.findViewById(R.id.textViewInfo);
 
         infoText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 //miejsce na możliwe funkcje dla administratora
-                ((MainActivity)getActivity()).clearDatabase();
+                ((MainActivity) Objects.requireNonNull(getActivity())).clearDatabase();
                 ((MainActivity)getActivity()).writeRecords();
                 ((MainActivity)getActivity()).refreshRecycler();
                 Toast.makeText(getContext(),"easter egg",Toast.LENGTH_SHORT).show();
@@ -38,10 +40,10 @@ public class FragmentInfo extends Fragment {
         buttonReset.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ((MainActivity)getActivity()).installDefaultDB();
+                ((MainActivity) Objects.requireNonNull(getActivity())).installDefaultDB();
                 ((MainActivity)getActivity()).writeRecords();
                 ((MainActivity)getActivity()).refreshRecycler();
-
+                Toast.makeText(getContext(),"Zainstalowano domyślną",Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -50,9 +52,9 @@ public class FragmentInfo extends Fragment {
         buttonUpdate.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ((MainActivity)getActivity()).updateData();
-                ((MainActivity)getActivity()).writeRecords();
-                ((MainActivity)getActivity()).refreshRecycler();
+                ((MainActivity) Objects.requireNonNull(getActivity())).updateData();
+                //((MainActivity)getActivity()).refreshRecycler();
+
                 return true;
             }
         });
