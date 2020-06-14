@@ -10,7 +10,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "ochronnik.db";
     private static final String TABLE_NAME = "ochronniki_table";
-    private static final String COL_1 = "id";
+    //private static final String COL_1 = "id";
     private static final String COL_2 = "typ";
     private static final String COL_3 = "prod";
     private static final String COL_4 = "model";

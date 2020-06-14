@@ -19,7 +19,10 @@ public class FragmentBase extends Fragment implements UpdateInterface {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState ) {
         View view = inflater.inflate(R.layout.fragment_base, container, false);
-        ArrayList<ItemHearingProtector> mlist = (ArrayList<ItemHearingProtector>) getArguments().getSerializable("bundle_key");
+        ArrayList<ItemHearingProtector> mlist = null;
+        if (getArguments() != null) {
+            mlist = (ArrayList<ItemHearingProtector>) getArguments().getSerializable("bundle_key");
+        }
         RecyclerView mRecyclerView1 = view.findViewById(R.id.recycler_view_baza);
         mRecyclerView1.setHasFixedSize(true);
         mAdapter = new RecyclerAdapter(getContext(),mlist);

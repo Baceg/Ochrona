@@ -100,6 +100,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         TextView dialog_apv2000 = mDialog.findViewById(R.id.dialog_apv2000);
         TextView dialog_apv4000 = mDialog.findViewById(R.id.dialog_apv4000);
         TextView dialog_apv8000 = mDialog.findViewById(R.id.dialog_apv8000);
+        final TextView dialog_text_graph = mDialog.findViewById(R.id.dialog_text_graph);
+        final TextView dialog_text_table = mDialog.findViewById(R.id.dialog_text_table);
 
         //set obrazek i nazwa
         if (clickedItem.getTyp().equals("N")) {
@@ -165,11 +167,37 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         dialog_H.setText("H: "+clickedItem.getH());
         dialog_SNR.setText("SNR: "+clickedItem.getSNR());
 
+
+        dialog_text_graph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_graph_layout.setVisibility(View.VISIBLE);
+                dialog_table_layout.setVisibility(View.GONE);
+                dialog_text_graph.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                dialog_text_table.setBackgroundColor(Color.parseColor("#7A7A7A"));
+
+            }
+        });
+
+        dialog_text_table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_graph_layout.setVisibility(View.GONE);
+                dialog_table_layout.setVisibility(View.VISIBLE);
+                dialog_text_table.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                dialog_text_graph.setBackgroundColor(Color.parseColor("#7A7A7A"));
+
+            }
+        });
+
         dialog_table_layout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 dialog_table_layout.setVisibility(View.GONE);
                 dialog_graph_layout.setVisibility(View.VISIBLE);
+                dialog_text_graph.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                dialog_text_table.setBackgroundColor(Color.parseColor("#7A7A7A"));
+
             }
         });
 
@@ -177,6 +205,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             public void onClick(View v) {
                 dialog_graph_layout.setVisibility(View.GONE);
                 dialog_table_layout.setVisibility(View.VISIBLE);
+                dialog_text_graph.setBackgroundColor(Color.parseColor("#7A7A7A"));
+                dialog_text_table.setBackgroundColor(Color.parseColor("#FFFFFF"));
             }
         });
 
@@ -185,6 +215,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             public void onClick(View v) {
                 dialog_graph_layout.setVisibility(View.GONE);
                 dialog_table_layout.setVisibility(View.VISIBLE);
+                dialog_text_graph.setBackgroundColor(Color.parseColor("#7A7A7A"));
+                dialog_text_table.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
             }
         });
 

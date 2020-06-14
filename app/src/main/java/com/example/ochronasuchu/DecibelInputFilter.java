@@ -14,7 +14,7 @@ public class DecibelInputFilter implements InputFilter {
         int maxDigitsBeforeDecimalPoint = 2;
         int maxDigitsAfterDecimalPoint = 1;
         if (!builder.toString().matches(
-                "(0|([1-9])([0-9]{0,"+(maxDigitsBeforeDecimalPoint -1)+"})?)?(\\.[0-9]{0,"+ maxDigitsAfterDecimalPoint +"})?"
+                "(0|(["+(maxDigitsBeforeDecimalPoint -1)+"-9])([0-9]?)?)?(\\.[0-9]{0,"+ maxDigitsAfterDecimalPoint +"})?"
 
         )) {
             if(source.length()==0)

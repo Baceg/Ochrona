@@ -41,4 +41,6 @@
     <string name="H_colon">H:</string>
     <string name="snr_colon">SNR:</string>
     <string name="numerical_data_of_sound_muted">Dane liczbowe tłumienia dźwięku</string>
+    <string name="graph">Wykres</string>
+    <string name="table">Tabela</string>
 </resources>
