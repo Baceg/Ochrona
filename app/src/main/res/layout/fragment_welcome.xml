@@ -8,14 +8,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="50dp"
-        android:text="@string/add" />
+        android:text="@string/add"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="5dp"
-        android:text="@string/sort" />
+        android:text="@string/sort"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,6 +25,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="@string/menu" />
+        android:text="@string/menu"
+        android:textColor="@android:color/black"/>
 
 </RelativeLayout>

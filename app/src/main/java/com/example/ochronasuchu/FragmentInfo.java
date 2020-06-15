@@ -40,10 +40,12 @@ public class FragmentInfo extends Fragment {
         buttonReset.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ((MainActivity) Objects.requireNonNull(getActivity())).installDefaultDB();
-                ((MainActivity)getActivity()).writeRecords();
-                ((MainActivity)getActivity()).refreshRecycler();
-                Toast.makeText(getContext(),"Zainstalowano domyślną",Toast.LENGTH_SHORT).show();
+                ((MainActivity) Objects.requireNonNull(getActivity())).openDialogResetDatabase();
+
+                //((MainActivity) Objects.requireNonNull(getActivity())).installDefaultDB();
+                //((MainActivity)getActivity()).writeRecords();
+                //((MainActivity)getActivity()).refreshRecycler();
+                //Toast.makeText(getContext(),"Zainstalowano domyślną",Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -60,4 +62,5 @@ public class FragmentInfo extends Fragment {
         });
     return view;
     }
+
 }

@@ -23,6 +23,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import org.threeten.bp.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     String addType = "N";
     Boolean dataInserted = false;
     Integer deletedRows = 0;
-
-
+    LocalDate currentDatabaseTime = (LocalDate) LocalDate.of(2020,5,27);
+    LocalDate stockDatabaseTime = (LocalDate) LocalDate.of(2020,5,27);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
                 showDialogAdd();
@@ -206,6 +207,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void openDialogResetDatabase(){
+        DatabaseResetDialog resetDialog = new DatabaseResetDialog();
+        resetDialog.show(getSupportFragmentManager(),"reset dialog");
+    }
     //metody do sortowania
     public void sortRecordsByProd() {
         Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
@@ -216,6 +221,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public String getCurrentDatabaseVersion(){
+     return String.valueOf(currentDatabaseTime.getDayOfMonth())+"."+String.valueOf(currentDatabaseTime.getMonthValue())+"."+String.valueOf(currentDatabaseTime.getYear());
+    }
+    public String getStockDatabaseVersion(){
+        return String.valueOf(stockDatabaseTime.getDayOfMonth())+"."+String.valueOf(stockDatabaseTime.getMonthValue())+"."+String.valueOf(stockDatabaseTime.getYear());
+    }
     public void sortUserRecordsByProd() {
         Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
             @Override
