@@ -2,23 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialog"
-    android:layout_width="370dp"
+    android:layout_width="370sp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="#FFFFFF"
     android:orientation="vertical">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp">
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/layout_prod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_marginStart="14dp"
             android:orientation="horizontal">
 
@@ -43,7 +43,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layout_prod"
             android:layout_marginStart="14dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
@@ -65,14 +64,12 @@
                 android:inputType="text"
                 android:textSize="14sp" />
         </LinearLayout>
-
         <RadioGroup
             android:id="@+id/radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/layout_prod">
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
             <RadioButton
                 android:id="@+id/radio_nausznik"
@@ -91,7 +88,8 @@
                 android:text="@string/inserts"
                 android:textSize="16sp" />
         </RadioGroup>
-    </RelativeLayout>
+
+    </LinearLayout>
 
 
     <TableLayout

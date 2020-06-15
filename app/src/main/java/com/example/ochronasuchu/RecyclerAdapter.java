@@ -19,6 +19,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.ArrayList;
+import java.util.Locale;
+
 //Obsługuje widget Recyclerview
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
     private ArrayList<ItemHearingProtector> mRecList;
@@ -140,27 +142,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         dialog_graph.addSeries(series2);
         dialog_graph.getLegendRenderer().setVisible(true);
 
-        dialog_mf125.setText(clickedItem.getMf125());
-        dialog_mf250.setText(clickedItem.getMf250());
-        dialog_mf500.setText(clickedItem.getMf500());
-        dialog_mf1000.setText(clickedItem.getMf1000());
-        dialog_mf2000.setText(clickedItem.getMf2000());
-        dialog_mf4000.setText(clickedItem.getMf4000());
-        dialog_mf8000.setText(clickedItem.getMf8000());
-        dialog_sf125.setText(clickedItem.getSf125());
-        dialog_sf250.setText(clickedItem.getSf250());
-        dialog_sf500.setText(clickedItem.getSf500());
-        dialog_sf1000.setText(clickedItem.getSf1000());
-        dialog_sf2000.setText(clickedItem.getSf2000());
-        dialog_sf4000.setText(clickedItem.getSf4000());
-        dialog_sf8000.setText(clickedItem.getSf8000());
-        dialog_apv125.setText(clickedItem.getAPV125());
-        dialog_apv250.setText(clickedItem.getAPV250());
-        dialog_apv500.setText(clickedItem.getAPV500());
-        dialog_apv1000.setText(clickedItem.getAPV1000());
-        dialog_apv2000.setText(clickedItem.getAPV2000());
-        dialog_apv4000.setText(clickedItem.getAPV4000());
-        dialog_apv8000.setText(clickedItem.getAPV8000());
+        dialog_mf125.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getMf125())));
+        dialog_mf250.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getMf250())));
+        dialog_mf500.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getMf500())));
+        dialog_mf1000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getMf1000())));
+        dialog_mf2000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getMf2000())));
+        dialog_mf4000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getMf4000())));
+        dialog_mf8000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getMf8000())));
+        dialog_sf125.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getSf125())));
+        dialog_sf250.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getSf250())));
+        dialog_sf500.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getSf500())));
+        dialog_sf1000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getSf1000())));
+        dialog_sf2000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getSf2000())));
+        dialog_sf4000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getSf4000())));
+        dialog_sf8000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getSf8000())));
+        dialog_apv125.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getAPV125())));
+        dialog_apv250.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getAPV250())));
+        dialog_apv500.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getAPV500())));
+        dialog_apv1000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getAPV1000())));
+        dialog_apv2000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getAPV2000())));
+        dialog_apv4000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getAPV4000())));
+        dialog_apv8000.setText(String.format(Locale.getDefault(),"%.1f",Float.parseFloat(clickedItem.getAPV8000())));
 
         dialog_L.setText("L: "+clickedItem.getL());
         dialog_M.setText("M: "+clickedItem.getM());
