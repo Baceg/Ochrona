@@ -43,4 +43,7 @@
     <string name="numerical_data_of_sound_muted">Dane liczbowe tłumienia dźwięku</string>
     <string name="graph">Wykres</string>
     <string name="table">Tabela</string>
+    <string name="current_version">Obecna Wersja:</string>
+    <string name="title">Baza danych przeznaczona do programu do doboru ochronników słuchu na urządzeniu mobilnym z systemem Android</string>
+    <string name="version">Ver: Beta 0.3</string>
 </resources>

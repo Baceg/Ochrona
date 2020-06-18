@@ -7,7 +7,6 @@
 
     <TextView
         android:id="@+id/textView1"
-
         android:layout_marginTop="220dp"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
@@ -39,8 +38,15 @@
         android:layout_centerInParent="true"
         android:text="@string/retrieve" />
     <TextView
+        android:id="@+id/textView0"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="22dp"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/resetButton"
+        android:text="@string/current_version" />
+    <TextView
         android:id="@+id/textViewInfo"
-
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"

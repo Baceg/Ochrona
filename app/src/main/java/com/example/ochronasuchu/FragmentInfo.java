@@ -1,5 +1,6 @@
 package com.example.ochronasuchu;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import java.util.Objects;
 //Fragment info
 public class FragmentInfo extends Fragment {
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ public class FragmentInfo extends Fragment {
         Button buttonUpdate = view.findViewById(R.id.updateButton);
         Button buttonReset = view.findViewById(R.id.resetButton);
         TextView infoText = view.findViewById(R.id.textViewInfo);
+        TextView versionText = view.findViewById(R.id.textView0);
+        versionText.setText("Obecna Wersja: "+((MainActivity) Objects.requireNonNull(getActivity())).getCurrentDatabaseVersion());
 
         infoText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -31,7 +35,7 @@ public class FragmentInfo extends Fragment {
                 ((MainActivity) Objects.requireNonNull(getActivity())).clearDatabase();
                 ((MainActivity)getActivity()).writeRecords();
                 ((MainActivity)getActivity()).refreshRecycler();
-                Toast.makeText(getContext(),"easter egg",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Usunięto bazę",Toast.LENGTH_SHORT).show();
                 return true;
             }
         }

@@ -12,19 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class DatabaseResetDialog extends AppCompatDialogFragment {
+public class DatabaseUpdateDialog extends AppCompatDialogFragment {
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         String currentDate = ((MainActivity) Objects.requireNonNull(getActivity())).getCurrentDatabaseVersion();
-        String stockDate = ((MainActivity) Objects.requireNonNull(getActivity())).getStockDatabaseVersion();
 
-
-
-        builder.setTitle("Przywrócić domyślną bazę danych?")
-                .setMessage("Obecna baza stworzona: "+currentDate+System.lineSeparator()+"Domyślna: "+stockDate)
+        builder.setTitle("Przywrócić fabryczną bazę danych?")
+                //.setMessage("Obecna baza stworzona: "+currentDate+System.lineSeparator()+"Domyślna: "+updateDate)
                 .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -41,6 +38,5 @@ public class DatabaseResetDialog extends AppCompatDialogFragment {
                 });
 
         return builder.create();
-
     }
 }

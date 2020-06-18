@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     String addType = "N";
     Boolean dataInserted = false;
     Integer deletedRows = 0;
-    LocalDate currentDatabaseTime = (LocalDate) LocalDate.of(2020,5,27);
-    LocalDate stockDatabaseTime = (LocalDate) LocalDate.of(2020,5,27);
+    LocalDate currentDatabaseTime = LocalDate.of(2020,5,27);
+    LocalDate stockDatabaseTime = LocalDate.of(2020,5,27);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -406,7 +406,7 @@ public class MainActivity extends AppCompatActivity {
     //metoda uruchomi się tylko raz po instalacji aplikacji
     //Podczas testów nieelegacko będzie tu podana baza danych, później możliwa zamiana na pobranie jej z internetu
     public void installDefaultDB() {
-
+        currentDatabaseTime = stockDatabaseTime;
         DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
         myDB.deleteWebData();
         myDB.insertData("W", "TON INSTITUTE ", "TP_01", "27.7", "28.5", "31.1", "29.1", "32.9", "40.8", "43.5", "6.3", "5.5", "7.4", "4.9", "3.1", "7.1", "4", "21.4", "23", "23.7", "24.2", "29.8", "33.7", "39.5", "30", "26", "24", "29", "UE/117/2019/1437");
