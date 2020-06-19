@@ -1,8 +1,11 @@
 package com.example.ochronasuchu;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+
 //ItemHearingProtector przechowuje informacje już po odczytaniu z bazy danych
-class ItemHearingProtector implements Serializable {
+class ItemHearingProtector implements Parcelable {
 
     private String typ;
     private String prod;
@@ -33,6 +36,50 @@ class ItemHearingProtector implements Serializable {
     private String L;
     private String SNR;
     private String certy;
+
+    private ItemHearingProtector(Parcel in) {
+        typ = in.readString();
+        prod = in.readString();
+        model = in.readString();
+        Mf125 = in.readString();
+        Mf250 = in.readString();
+        Mf500 = in.readString();
+        Mf1000 = in.readString();
+        Mf2000 = in.readString();
+        Mf4000 = in.readString();
+        Mf8000 = in.readString();
+        sf125 = in.readString();
+        sf250 = in.readString();
+        sf500 = in.readString();
+        sf1000 = in.readString();
+        sf2000 = in.readString();
+        sf4000 = in.readString();
+        sf8000 = in.readString();
+        APV125 = in.readString();
+        APV250 = in.readString();
+        APV500 = in.readString();
+        APV1000 = in.readString();
+        APV2000 = in.readString();
+        APV4000 = in.readString();
+        APV8000 = in.readString();
+        H = in.readString();
+        M = in.readString();
+        L = in.readString();
+        SNR = in.readString();
+        certy = in.readString();
+    }
+
+    public static final Creator<ItemHearingProtector> CREATOR = new Creator<ItemHearingProtector>() {
+        @Override
+        public ItemHearingProtector createFromParcel(Parcel in) {
+            return new ItemHearingProtector(in);
+        }
+
+        @Override
+        public ItemHearingProtector[] newArray(int size) {
+            return new ItemHearingProtector[size];
+        }
+    };
 
     String getMf125() {
         return Mf125;
@@ -187,4 +234,41 @@ class ItemHearingProtector implements Serializable {
         this.certy = certy;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(typ);
+        dest.writeString(prod);
+        dest.writeString(model);
+        dest.writeString(Mf125);
+        dest.writeString(Mf250);
+        dest.writeString(Mf500);
+        dest.writeString(Mf1000);
+        dest.writeString(Mf2000);
+        dest.writeString(Mf4000);
+        dest.writeString(Mf8000);
+        dest.writeString(sf125);
+        dest.writeString(sf250);
+        dest.writeString(sf500);
+        dest.writeString(sf1000);
+        dest.writeString(sf2000);
+        dest.writeString(sf4000);
+        dest.writeString(sf8000);
+        dest.writeString(APV125);
+        dest.writeString(APV250);
+        dest.writeString(APV500);
+        dest.writeString(APV1000);
+        dest.writeString(APV2000);
+        dest.writeString(APV4000);
+        dest.writeString(APV8000);
+        dest.writeString(H);
+        dest.writeString(M);
+        dest.writeString(L);
+        dest.writeString(SNR);
+        dest.writeString(certy);
+    }
 }

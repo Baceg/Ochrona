@@ -60,7 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         rvh.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemHearingProtector clickedItem = mRecList.get(rvh.getAdapterPosition());
+                ItemHearingProtector clickedItem = mRecList.get(rvh.getBindingAdapterPosition());
                 writeDialog(clickedItem);
                 mDialog.show();
             }

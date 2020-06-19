@@ -37,6 +37,7 @@ public class DatabaseUpdateDialog extends AppCompatDialogFragment {
                         ((MainActivity) Objects.requireNonNull(getActivity())).updateData();
                         ((MainActivity)getActivity()).writeRecords();
                         ((MainActivity)getActivity()).setCurrentDatabaseTime(((MainActivity)getActivity()).getOnlineDatabaseTime());
+                        ((MainActivity)getActivity()).resetFragmentInfo();
                     }
                 });
 

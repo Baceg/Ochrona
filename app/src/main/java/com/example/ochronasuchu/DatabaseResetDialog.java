@@ -37,9 +37,9 @@ public class DatabaseResetDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         ((MainActivity) Objects.requireNonNull(getActivity())).installDefaultDB();
                         ((MainActivity)getActivity()).writeRecords();
-                        ((MainActivity)getActivity()).refreshRecycler();
                         ((MainActivity)getActivity()).setCurrentDatabaseTime(((MainActivity)getActivity()).getStockDatabaseTime());
                         Toast.makeText(getContext(),"Zainstalowano domyślną Bazę Danych",Toast.LENGTH_SHORT).show();
+                        ((MainActivity)getActivity()).resetFragmentInfo();
                     }
                 });
 

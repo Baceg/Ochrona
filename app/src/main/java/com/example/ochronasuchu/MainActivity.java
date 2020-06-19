@@ -11,7 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,8 +33,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<ItemHearingProtector> listProtection;
-    private ArrayList<ItemHearingProtector> listProtectionUser;
+    private ArrayList<ItemHearingProtector> listProtection = new ArrayList<>();
+    private ArrayList<ItemHearingProtector> listProtectionUser = new ArrayList<>();
     private UpdateInterface listener;
     String addType = "N";
     Boolean dataInserted = false;
@@ -128,7 +127,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    public void resetFragmentInfo(){
+        FragmentInfo fragment = new FragmentInfo();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+    }
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener naviListener =
@@ -141,14 +143,14 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.navigation_baza:
                             selectedFragment = new FragmentBase();
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable("bundle_key", listProtection);
+                            bundle.putParcelableArrayList("bundle_key",listProtection);
                             selectedFragment.setArguments(bundle);
                             setListener((UpdateInterface) selectedFragment);
                             break;
                         case R.id.navigation_moje:
                             selectedFragment = new FragmentUser();
                             Bundle bundle2 = new Bundle();
-                            bundle2.putSerializable("bundle_key", listProtectionUser);
+                            bundle2.putParcelableArrayList("bundle_key",  listProtectionUser);
                             selectedFragment.setArguments(bundle2);
                             setListener((UpdateInterface) selectedFragment);
                             break;
@@ -348,8 +350,18 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
                 onlineDataInput = getTextFromWeb("https://goraceochronnikisluchu.pl/ochronniki/");
-                setOnlineDatabaseTime(LocalDate.parse(onlineDataInput.get(0), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-                showDialogUpdateDatabase();
+                if (onlineDataInput != null) {
+                    setOnlineDatabaseTime(LocalDate.parse(onlineDataInput.get(0), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+                    showDialogUpdateDatabase();
+                }
+                else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Brak połączenia z serwerem", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
 
         }).start();
@@ -381,7 +393,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (deletedRows == 0 && dataInserted) {
                     Toast.makeText(getApplicationContext(), "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
                 } else if (deletedRows == 0 && !dataInserted) {
-                    Toast.makeText(getApplicationContext(), "Brak połączenia ze stroną", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Brak połączenia z serwerem", Toast.LENGTH_SHORT).show();
                 }
                 dataInserted = false;
             }
