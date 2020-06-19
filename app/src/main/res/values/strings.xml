@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ochrona Słuchu</string>
+    <string name="app_name">Ochronniki Słuchu</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -45,5 +45,5 @@
     <string name="table">Tabela</string>
     <string name="current_version">Obecna Wersja:</string>
     <string name="title">Baza danych przeznaczona do programu do doboru ochronników słuchu na urządzeniu mobilnym z systemem Android</string>
-    <string name="version">Ver: Beta 0.3</string>
+    <string name="version">Ver: Beta 0.4</string>
 </resources>

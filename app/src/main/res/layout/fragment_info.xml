@@ -12,6 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_height="22dp"
         android:layout_above="@+id/updateButton"
+        android:textColor="@android:color/black"
         android:text="@string/update_db" />
 
     <Button
@@ -23,12 +24,12 @@
         android:text="@string/update" />
     <TextView
         android:id="@+id/textView2"
-
         android:layout_margin="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/resetButton"
         android:gravity="center"
+        android:textColor="@android:color/black"
         android:text="@string/info_text"/>
     <Button
         android:id="@+id/resetButton"
@@ -44,6 +45,7 @@
         android:layout_height="22dp"
         android:layout_marginTop="60dp"
         android:layout_below="@+id/resetButton"
+        android:textColor="@android:color/black"
         android:text="@string/current_version" />
     <TextView
         android:id="@+id/textViewInfo"
@@ -52,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:longClickable="true"
+        android:textColor="@android:color/black"
         android:text="@string/author" />
 
 

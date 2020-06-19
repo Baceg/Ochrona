@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.Objects;
 
 //Fragment info
@@ -26,7 +28,7 @@ public class FragmentInfo extends Fragment {
         Button buttonReset = view.findViewById(R.id.resetButton);
         TextView infoText = view.findViewById(R.id.textViewInfo);
         TextView versionText = view.findViewById(R.id.textView0);
-        versionText.setText("Obecna Wersja: "+((MainActivity) Objects.requireNonNull(getActivity())).getCurrentDatabaseVersion());
+        versionText.setText("Obecna Wersja: "+((MainActivity) Objects.requireNonNull(getActivity())).getCurrentDatabaseTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
 
         infoText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -41,27 +43,18 @@ public class FragmentInfo extends Fragment {
         }
         );
 
-        buttonReset.setOnLongClickListener(new View.OnLongClickListener() {
+        buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                ((MainActivity) Objects.requireNonNull(getActivity())).openDialogResetDatabase();
-
-                //((MainActivity) Objects.requireNonNull(getActivity())).installDefaultDB();
-                //((MainActivity)getActivity()).writeRecords();
-                //((MainActivity)getActivity()).refreshRecycler();
-                //Toast.makeText(getContext(),"Zainstalowano domyślną",Toast.LENGTH_SHORT).show();
-                return true;
+            public void onClick(View v) {
+                ((MainActivity) Objects.requireNonNull(getActivity())).showDialogResetDatabase();
             }
         });
 
 
-        buttonUpdate.setOnLongClickListener(new View.OnLongClickListener() {
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                ((MainActivity) Objects.requireNonNull(getActivity())).updateData();
-                //((MainActivity)getActivity()).refreshRecycler();
-
-                return true;
+            public void onClick(View v) {
+                ((MainActivity) Objects.requireNonNull(getActivity())).downloadData();
             }
         });
     return view;

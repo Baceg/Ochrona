@@ -24,6 +24,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,8 +40,29 @@ public class MainActivity extends AppCompatActivity {
     String addType = "N";
     Boolean dataInserted = false;
     Integer deletedRows = 0;
+
+
     LocalDate currentDatabaseTime = LocalDate.of(2020,5,27);
     LocalDate stockDatabaseTime = LocalDate.of(2020,5,27);
+    LocalDate onlineDatabaseTime = LocalDate.of(2020,5,27);
+    List<String> onlineDataInput = null;
+
+    public LocalDate getCurrentDatabaseTime() {
+        return currentDatabaseTime;
+    }
+    public LocalDate getStockDatabaseTime() {
+        return stockDatabaseTime;
+    }
+    public LocalDate getOnlineDatabaseTime() {
+        return onlineDatabaseTime;
+    }
+    public void setCurrentDatabaseTime(LocalDate currentDatabaseTime) {
+        this.currentDatabaseTime = currentDatabaseTime;
+    }
+    public void setOnlineDatabaseTime(LocalDate onlineDatabaseTime) {
+        this.onlineDatabaseTime = onlineDatabaseTime;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,10 +230,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void openDialogResetDatabase(){
+    public void showDialogResetDatabase(){
         DatabaseResetDialog resetDialog = new DatabaseResetDialog();
         resetDialog.show(getSupportFragmentManager(),"reset dialog");
     }
+
+    public void showDialogUpdateDatabase(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseUpdateDialog updateDialog = new DatabaseUpdateDialog();
+                updateDialog.show(getSupportFragmentManager(), "update dialog");
+             }
+        });
+    }
+
+
+
     //metody do sortowania
     public void sortRecordsByProd() {
         Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
@@ -220,13 +256,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    public String getCurrentDatabaseVersion(){
-     return String.valueOf(currentDatabaseTime.getDayOfMonth())+"."+String.valueOf(currentDatabaseTime.getMonthValue())+"."+String.valueOf(currentDatabaseTime.getYear());
-    }
-    public String getStockDatabaseVersion(){
-        return String.valueOf(stockDatabaseTime.getDayOfMonth())+"."+String.valueOf(stockDatabaseTime.getMonthValue())+"."+String.valueOf(stockDatabaseTime.getYear());
-    }
     public void sortUserRecordsByProd() {
         Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
             @Override
@@ -235,7 +264,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortRecordsByH() {
         Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
             @Override
@@ -244,7 +272,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortUserRecordsByH() {
         Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
             @Override
@@ -253,7 +280,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortRecordsByM() {
         Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
             @Override
@@ -262,7 +288,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortUserRecordsByM() {
         Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
             @Override
@@ -271,7 +296,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortRecordsByL() {
         Collections.sort(listProtection, new Comparator<ItemHearingProtector>() {
             @Override
@@ -280,7 +304,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void sortUserRecordsByL() {
         Collections.sort(listProtectionUser, new Comparator<ItemHearingProtector>() {
             @Override
@@ -319,46 +342,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Metoda pobiera dane ze strony internetowej i wpisuje do bazy danych
-    public void updateData() {
+    public void downloadData() {
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                final List<String> addressList = getTextFromWeb("https://goraceochronnikisluchu.pl/ochronniki/");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
-                        if (addressList != null) {
-                            deletedRows = myDB.deleteWebData();
-                            for (int i = 0; i < addressList.size() / 29; i++)
-                                myDB.insertData(addressList.get(i * 29), addressList.get(i * 29 + 1), addressList.get(i * 29 + 2), addressList.get(i * 29 + 3), addressList.get(i * 29 + 4), addressList.get(i * 29 + 5),
-                                        addressList.get(i * 29 + 6), addressList.get(i * 29 + 7), addressList.get(i * 29 + 8), addressList.get(i * 29 + 9), addressList.get(i * 29 + 10), addressList.get(i * 29 + 11),
-                                        addressList.get(i * 29 + 12), addressList.get(i * 29 + 13), addressList.get(i * 29 + 14), addressList.get(i * 29 + 15), addressList.get(i * 29 + 16), addressList.get(i * 29 + 17),
-                                        addressList.get(i * 29 + 18), addressList.get(i * 29 + 19), addressList.get(i * 29 + 20), addressList.get(i * 29 + 21), addressList.get(i * 29 + 22), addressList.get(i * 29 + 23),
-                                        addressList.get(i * 29 + 24), addressList.get(i * 29 + 25), addressList.get(i * 29 + 26), addressList.get(i * 29 + 27), addressList.get(i * 29 + 28));
-                            dataInserted = true;
-                        }
-                        myDB.close();
-                        if (deletedRows > 0 && dataInserted) {
-                            Toast.makeText(getApplicationContext(), "Aktualizacja ukończona pomyślnie", Toast.LENGTH_SHORT).show();
-                        } else if (deletedRows > 0 && !dataInserted) {
-                            Toast.makeText(getApplicationContext(), "Usunieto i nie dodano", Toast.LENGTH_SHORT).show();
-                        } else if (deletedRows == 0 && dataInserted) {
-                            Toast.makeText(getApplicationContext(), "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
-                        } else if (deletedRows == 0 && !dataInserted) {
-                            Toast.makeText(getApplicationContext(), "Brak połączenia ze stroną", Toast.LENGTH_SHORT).show();
-                        }
-                        dataInserted = false;
-                    }
-                });
-                writeRecords();
+                onlineDataInput = getTextFromWeb("https://goraceochronnikisluchu.pl/ochronniki/");
+                setOnlineDatabaseTime(LocalDate.parse(onlineDataInput.get(0), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+                showDialogUpdateDatabase();
             }
 
         }).start();
 
     }
+    public void updateData(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+
+                DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());
+                if (onlineDataInput != null) {
+                    deletedRows = myDB.deleteWebData();
+                    // i=0 to data, i=1 to typ, i = 29 to certyfikat, i = 30 to typ
+                    for (int i = 0; i < onlineDataInput.size() / 29; i++)
+                        myDB.insertData(onlineDataInput.get(i * 29 + 1), onlineDataInput.get(i * 29 + 2), onlineDataInput.get(i * 29 + 3), onlineDataInput.get(i * 29 + 4), onlineDataInput.get(i * 29 + 5),
+                                onlineDataInput.get(i * 29 + 6), onlineDataInput.get(i * 29 + 7), onlineDataInput.get(i * 29 + 8), onlineDataInput.get(i * 29 + 9), onlineDataInput.get(i * 29 + 10), onlineDataInput.get(i * 29 + 11),
+                                onlineDataInput.get(i * 29 + 12), onlineDataInput.get(i * 29 + 13), onlineDataInput.get(i * 29 + 14), onlineDataInput.get(i * 29 + 15), onlineDataInput.get(i * 29 + 16), onlineDataInput.get(i * 29 + 17),
+                                onlineDataInput.get(i * 29 + 18), onlineDataInput.get(i * 29 + 19), onlineDataInput.get(i * 29 + 20), onlineDataInput.get(i * 29 + 21), onlineDataInput.get(i * 29 + 22), onlineDataInput.get(i * 29 + 23),
+                                onlineDataInput.get(i * 29 + 24), onlineDataInput.get(i * 29 + 25), onlineDataInput.get(i * 29 + 26), onlineDataInput.get(i * 29 + 27), onlineDataInput.get(i * 29 + 28),onlineDataInput.get(i * 29 + 29));
+                    dataInserted = true;
+                }
+                myDB.close();
+                if (deletedRows > 0 && dataInserted) {
+                    Toast.makeText(getApplicationContext(), "Aktualizacja ukończona pomyślnie", Toast.LENGTH_SHORT).show();
+                } else if (deletedRows > 0 && !dataInserted) {
+                    Toast.makeText(getApplicationContext(), "Usunieto i nie dodano", Toast.LENGTH_SHORT).show();
+                } else if (deletedRows == 0 && dataInserted) {
+                    Toast.makeText(getApplicationContext(), "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
+                } else if (deletedRows == 0 && !dataInserted) {
+                    Toast.makeText(getApplicationContext(), "Brak połączenia ze stroną", Toast.LENGTH_SHORT).show();
+                }
+                dataInserted = false;
+            }
+        });
+    }
+
 
     public void addToDatabase(ArrayList<String> list) {
         DatabaseHelper myDB = new DatabaseHelper(getApplicationContext());

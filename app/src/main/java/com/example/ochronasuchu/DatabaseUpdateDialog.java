@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -17,11 +19,14 @@ public class DatabaseUpdateDialog extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        String currentDate = ((MainActivity) Objects.requireNonNull(getActivity())).getCurrentDatabaseVersion();
+        String currentDate = ((MainActivity) Objects.requireNonNull(getActivity())).getCurrentDatabaseTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String onlineDate = ((MainActivity)getActivity()).getOnlineDatabaseTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
-        builder.setTitle("Przywrócić fabryczną bazę danych?")
-                //.setMessage("Obecna baza stworzona: "+currentDate+System.lineSeparator()+"Domyślna: "+updateDate)
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Pobrać bazę danych z internetu?")
+                .setMessage("Obecna baza stworzona: "+currentDate+System.lineSeparator()+"Na serwerze: "+onlineDate)
                 .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -30,10 +35,9 @@ public class DatabaseUpdateDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Tak", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ((MainActivity) Objects.requireNonNull(getActivity())).installDefaultDB();
+                        ((MainActivity) Objects.requireNonNull(getActivity())).updateData();
                         ((MainActivity)getActivity()).writeRecords();
-                        ((MainActivity)getActivity()).refreshRecycler();
-                        Toast.makeText(getContext(),"Zainstalowano domyślną Bazę Danych",Toast.LENGTH_SHORT).show();
+                        ((MainActivity)getActivity()).setCurrentDatabaseTime(((MainActivity)getActivity()).getOnlineDatabaseTime());
                     }
                 });
 
