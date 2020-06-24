@@ -320,7 +320,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void refreshRecycler() {
-        listener.updateRecycler();
+        if (listener !=null) {
+            listener.updateRecycler();
+        }
     }
     //Metoda odczytuje stronę internetową i zapisuje w liście
     public List<String> getTextFromWeb(String urlString) {

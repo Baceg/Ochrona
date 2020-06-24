@@ -75,10 +75,10 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         if (editTextApv2000.getText().toString().equals("")) editTextApv2000.setText("0");
                         if (editTextApv4000.getText().toString().equals("")) editTextApv4000.setText("0");
                         if (editTextApv8000.getText().toString().equals("")) editTextApv8000.setText("0");
-                        if (editTextH.getText().toString().equals("")) editTextH.setText("0");
-                        if (editTextM.getText().toString().equals("")) editTextM.setText("0");
-                        if (editTextL.getText().toString().equals("")) editTextL.setText("0");
-                        if (editTextSNR.getText().toString().equals("")) editTextSNR.setText("0");
+                        if (editTextH.getText().toString().equals("") || editTextH.getText().toString().equals("00")) editTextH.setText("0");
+                        if (editTextM.getText().toString().equals("") || editTextM.getText().toString().equals("00")) editTextM.setText("0");
+                        if (editTextL.getText().toString().equals("") || editTextL.getText().toString().equals("00")) editTextL.setText("0");
+                        if (editTextSNR.getText().toString().equals("") || editTextSNR.getText().toString().equals("00")) editTextSNR.setText("0");
                         //wprowadenie wartości do listy która będzie przekazana do bazy danych
                         data.add(editTextProd.getText().toString());
                         data.add(editTextModel.getText().toString());

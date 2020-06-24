@@ -35,6 +35,8 @@ public class FragmentUser extends Fragment implements UpdateInterface {
     }
     //Umożliwia odświerzanie Recyclera z MainActivity
     public void updateRecycler(){
-        mAdapter.notifyDataSetChanged();
+        if (mAdapter!=null) {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }
