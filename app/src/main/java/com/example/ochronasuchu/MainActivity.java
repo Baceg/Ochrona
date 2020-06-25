@@ -227,13 +227,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDialogAdd() {
-        AddItemDialog addItemDialog = new AddItemDialog();
-        addItemDialog.show(getSupportFragmentManager(), "add dialog");
+        DialogAddItem dialogAddItem = new DialogAddItem();
+        dialogAddItem.show(getSupportFragmentManager(), "add dialog");
 
     }
 
     public void showDialogResetDatabase(){
-        DatabaseResetDialog resetDialog = new DatabaseResetDialog();
+        DialogResetDatabase resetDialog = new DialogResetDatabase();
         resetDialog.show(getSupportFragmentManager(),"reset dialog");
     }
 
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                DatabaseUpdateDialog updateDialog = new DatabaseUpdateDialog();
+                DialogUpdateDatabase updateDialog = new DialogUpdateDatabase();
                 updateDialog.show(getSupportFragmentManager(), "update dialog");
              }
         });

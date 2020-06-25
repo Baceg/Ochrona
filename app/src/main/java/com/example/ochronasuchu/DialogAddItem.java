@@ -14,8 +14,8 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
-//AddItemDialog obsługuje formularz z dodawnaiem ochronnika do bazy
-public class AddItemDialog extends AppCompatDialogFragment {
+//DialogAddItem obsługuje formularz z dodawnaiem ochronnika do bazy
+public class DialogAddItem extends AppCompatDialogFragment {
 
     private EditText editTextMf125;
     private EditText editTextMf250;
