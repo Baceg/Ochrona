@@ -29,7 +29,7 @@
     <string name="update_db">Zaktualizuj bazę danych:</string>
     <string name="info_text">Aplikacja powstała z myślą o inspektorach BHP i pracownikach narażonych na hałas. Umożliwia łatwy dostęp do informacji, charakterystyk wybranych ochronników słuchu dostępnych na polskim rynku.</string>
     <string name="retrieve">Odzyskaj</string>
-    <string name="retrieve_db">Odzyskaj domyślną bazę danych</string>
+    <string name="retrieve_db">Odzyskaj domyślną bazę danych:</string>
     <string name="author">Adam Goszkowski 2020</string>
     <string name="mf_colon">Mf:</string>
     <string name="sf_colon">Sf:</string>
