@@ -28,7 +28,7 @@ public class FragmentInfo extends Fragment {
         Button buttonReset = view.findViewById(R.id.resetButton);
         TextView infoText = view.findViewById(R.id.textViewInfo);
         TextView versionText = view.findViewById(R.id.textView0);
-        versionText.setText("Obecna Wersja: "+((MainActivity) Objects.requireNonNull(getActivity())).getCurrentDatabaseTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        versionText.setText("Obecna wersja bazy danych: "+((MainActivity) Objects.requireNonNull(getActivity())).getCurrentDatabaseTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
 
         infoText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

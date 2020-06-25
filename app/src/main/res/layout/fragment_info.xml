@@ -6,13 +6,41 @@
     android:background="@color/infoBackground">
 
 
+
     <TextView
-        android:id="@+id/textView1"
-        android:layout_marginTop="220dp"
+        android:id="@+id/textView2"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView0"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:text="@string/info_text"/>
+    <TextView
+        android:id="@+id/textView0"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_height="22dp"
-        android:layout_above="@+id/updateButton"
+        android:layout_marginTop="20dp"
+        android:layout_above="@+id/textView3"
+        android:textColor="@android:color/black"
+        android:text="@string/current_version" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="22dp"
+        android:layout_above="@+id/resetButton"
+        android:textColor="@android:color/black"
+        android:text="@string/retrieve_db" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="22dp"
+        android:layout_below="@+id/resetButton"
         android:textColor="@android:color/black"
         android:text="@string/update_db" />
 
@@ -21,17 +49,8 @@
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView2"
+        android:layout_below="@+id/textView1"
         android:text="@string/update" />
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_margin="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/resetButton"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:text="@string/info_text"/>
     <Button
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
@@ -39,15 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/retrieve" />
-    <TextView
-        android:id="@+id/textView0"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_height="22dp"
-        android:layout_marginTop="60dp"
-        android:layout_below="@+id/resetButton"
-        android:textColor="@android:color/black"
-        android:text="@string/current_version" />
+
     <TextView
         android:id="@+id/textViewInfo"
         android:layout_alignParentBottom="true"

@@ -25,10 +25,11 @@
     <string name="number2k">2k</string>
     <string name="number4k">4k</string>
     <string name="number8k">8k</string>
-    <string name="update">Aktualizacja</string>
+    <string name="update">Aktualizuj</string>
     <string name="update_db">Zaktualizuj bazę danych:</string>
     <string name="info_text">Aplikacja powstała z myślą o inspektorach BHP i pracownikach narażonych na hałas. Umożliwia łatwy dostęp do informacji, charakterystyk wybranych ochronników słuchu dostępnych na polskim rynku.</string>
-    <string name="retrieve">Odzyskaj Domyślną Bazę Danych</string>
+    <string name="retrieve">Odzyskaj</string>
+    <string name="retrieve_db">Odzyskaj domyślną bazę danych</string>
     <string name="author">Adam Goszkowski 2020</string>
     <string name="mf_colon">Mf:</string>
     <string name="sf_colon">Sf:</string>
@@ -43,7 +44,7 @@
     <string name="numerical_data_of_sound_muted">Dane liczbowe tłumienia dźwięku</string>
     <string name="graph">Wykres</string>
     <string name="table">Tabela</string>
-    <string name="current_version">Obecna Wersja:</string>
+    <string name="current_version">Obecna wersja bazy danych:</string>
     <string name="title">Baza danych przeznaczona do programu do doboru ochronników słuchu na urządzeniu mobilnym z systemem Android</string>
     <string name="version">Ver: 1.0</string>
     <string name="base">Baza</string>
