@@ -337,11 +337,9 @@ public class MainActivity extends AppCompatActivity {
             String separate_records[] = String.valueOf(builder).split(" @@@ ");
             placeAddress = Arrays.asList(separate_records);
             return placeAddress; // return whatever you need
-            //}
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
